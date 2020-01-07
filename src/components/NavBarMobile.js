@@ -4,26 +4,34 @@ import { NavLink } from "react-router-dom";
 //my components
 import NavLinkItem from "./NavLinkItem";
 
-const NavBar = () => {
+const NavBarMobile = () => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
-  const link = {
-    color: "black"
+  const navbarColors = {
+    backgroundColor: "maroon",
+    color: "white",
+    border: "none",
+    width: "100vw"
   };
-
   return (
-    <div>
-      <NavLinkItem linkName="about" displayName="About" />
-      <NavLinkItem linkName="portraits" displayName="Portraits" />
-      <NavLinkItem linkName="auctions" displayName="Auctions" />
+    <div style={navbarColors}>
+      <NavLinkItem linkName="about" />
+      <NavLinkItem linkName="portraits" />
+      <NavLinkItem linkName="auctions" />
 
       {!isAuthenticated && (
-        <button onClick={() => loginWithRedirect({})}>Log in</button>
+        <button onClick={() => loginWithRedirect({})} style={navbarColors}>
+          LOG IN
+        </button>
       )}
       {/* only show logout when user is logged in */}
-      {isAuthenticated && <button onClick={() => logout()}>Log out</button>}
+      {isAuthenticated && (
+        <button onClick={() => logout()} color="white">
+          LOG OUT
+        </button>
+      )}
     </div>
   );
 };
 
-export default NavBar;
+export default NavBarMobile;

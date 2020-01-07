@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const NavLinkItem = props => {
   const link = {
-    color: "black"
+    color: "white"
   };
 
   return (
@@ -13,10 +13,10 @@ const NavLinkItem = props => {
         exact
         style={link}
         activeStyle={{
-          textDecoration: "underline overline"
+          textDecoration: "underline overline white"
         }}
       >
-        {props.displayName}
+        {props.linkName.toUpperCase()}
       </NavLink>
     </div>
   );

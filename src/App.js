@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 //semantic-ui components
 import { Grid, Image } from "semantic-ui-react";
-//my componenets
+//auth0 components
+import { useAuth0 } from "./react-auth0-spa";
+//my components
 import NavBarMobile from "./components/NavBarMobile";
-import Profile from "./components/Profile";
+import NavBar from "./components/NavBar";
 import LandingPage from "./components/LandingPage";
 import Portraits from "./containers/Portraits";
 import Auction from "./containers/Auction";
@@ -23,10 +25,14 @@ function App() {
     setNavbar(!navbar);
   };
 
-  return (
-    <div style={centeredText}>
-      {/* Don't forget to include the history module */}
+  // const { loading } = useAuth0();
 
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+
+  return (
+    <div className="App" style={centeredText}>
       <Router history={history}>
         <header>{navbar === true && <NavBarMobile />}</header>
         <h3 onClick={navbarDisplay}>MENU</h3>
