@@ -6,6 +6,7 @@ import { Grid, Image } from "semantic-ui-react";
 //auth0 components
 import { useAuth0 } from "./react-auth0-spa";
 //my components
+import "./App.css";
 import NavBarMobile from "./components/NavBarMobile";
 import NavBar from "./components/NavBar";
 import LandingPage from "./components/LandingPage";
@@ -32,7 +33,7 @@ function App() {
   // }
 
   return (
-    <div className="App" style={centeredText}>
+    <div className="background" style={centeredText}>
       <Router history={history}>
         <header>{navbar === true && <NavBarMobile />}</header>
         <h3 onClick={navbarDisplay}>MENU</h3>

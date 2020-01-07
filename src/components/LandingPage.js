@@ -11,7 +11,11 @@ const LandingPage = () => {
   };
   return (
     <>
-      <h1>CAROLINE SEILERN ART</h1>
+      <br />
+      <br />
+      <Grid centered>
+        <h1>CAROLINE SEILERN ART</h1>
+      </Grid>
       <br />
       <br />
       <Image src={drawings} style={centerImage} />

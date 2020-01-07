@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const NavLinkItem = props => {
   const link = {
-    color: "white"
+    color: "maroon"
   };
 
   return (

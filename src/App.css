@@ -6,5 +6,16 @@
 }
 
 .body {
+  background-color: snow;
+  text-align: "center";
+  width: 100vw;
+  height: 100vh;
+}
+
+h1 {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  width: 310px;
   text-align: center;
+  padding: 10px;
 }

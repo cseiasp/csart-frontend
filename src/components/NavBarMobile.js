@@ -1,6 +1,8 @@
 import React from "react";
 import { useAuth0 } from "../react-auth0-spa";
 import { NavLink } from "react-router-dom";
+//semantic-ui components
+import { Divider } from "semantic-ui-react";
 //my components
 import NavLinkItem from "./NavLinkItem";
 
@@ -8,8 +10,8 @@ const NavBarMobile = () => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   const navbarColors = {
-    backgroundColor: "maroon",
-    color: "white",
+    backgroundColor: "snow",
+    color: "maroon",
     border: "none",
     width: "100vw"
   };
@@ -30,6 +32,7 @@ const NavBarMobile = () => {
           LOG OUT
         </button>
       )}
+      <Divider />
     </div>
   );
 };
