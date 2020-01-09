@@ -1,21 +1,21 @@
-.h1 {
-  text-align: center;
-}
+/* @import url("https://fonts.googleapis.com/css?family=Josefin+Sans"); */
+
 .app {
   text-align: center;
 }
 
-.body {
-  background-color: snow;
-  text-align: "center";
-  width: 100vw;
-  height: 100vh;
-}
+/* .body {
+  font-family: "Josefin Sans";
+} */
 
 h1 {
   border-top: 1px solid;
   border-bottom: 1px solid;
-  width: 310px;
   text-align: center;
   padding: 10px;
+}
+
+.centerImage {
+  width: "95vw";
+  margin: "0 auto";
 }

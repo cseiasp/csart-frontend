@@ -7,7 +7,7 @@ const NavLinkItem = props => {
   };
 
   return (
-    <div>
+    <>
       <NavLink
         to={"/" + props.linkName}
         exact
@@ -15,10 +15,11 @@ const NavLinkItem = props => {
         activeStyle={{
           textDecoration: "underline overline white"
         }}
+        onClick={props.close}
       >
         {props.linkName.toUpperCase()}
       </NavLink>
-    </div>
+    </>
   );
 };
 

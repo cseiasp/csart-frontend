@@ -6,20 +6,37 @@ import { Divider } from "semantic-ui-react";
 //my components
 import NavLinkItem from "./NavLinkItem";
 
-const NavBarMobile = () => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+const NavBarMobile = props => {
+  const {
+    isAuthenticated,
+    loginWithRedirect,
+    logout,
+    loading,
+    user
+  } = useAuth0();
 
   const navbarColors = {
-    backgroundColor: "snow",
+    backgroundColor: "white",
     color: "maroon",
     border: "none",
-    width: "100vw"
+    fontSize: "40px",
+    width: "80vw",
+    padding: "5px",
+    textAlign: "center"
   };
+
   return (
     <div style={navbarColors}>
-      <NavLinkItem linkName="about" />
-      <NavLinkItem linkName="portraits" />
-      <NavLinkItem linkName="auctions" />
+      <NavLinkItem linkName="about" close={props.close} />
+
+      <Divider />
+
+      <NavLinkItem linkName="portraits" close={props.close} />
+
+      <Divider />
+      <NavLinkItem linkName="auctions" close={props.close} />
+
+      <Divider />
 
       {!isAuthenticated && (
         <button onClick={() => loginWithRedirect({})} style={navbarColors}>
@@ -28,11 +45,13 @@ const NavBarMobile = () => {
       )}
       {/* only show logout when user is logged in */}
       {isAuthenticated && (
-        <button onClick={() => logout()} color="white">
+        <NavLinkItem linkName="myauction" close={props.close} />
+      )}
+      {isAuthenticated && (
+        <button onClick={() => logout()} style={navbarColors}>
           LOG OUT
         </button>
       )}
-      <Divider />
     </div>
   );
 };

@@ -2,62 +2,90 @@
 import React, { useState } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 //semantic-ui components
-import { Grid, Image } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 //auth0 components
 import { useAuth0 } from "./react-auth0-spa";
 //my components
 import "./App.css";
 import NavBarMobile from "./components/NavBarMobile";
-import NavBar from "./components/NavBar";
 import LandingPage from "./components/LandingPage";
 import Portraits from "./containers/Portraits";
-import Auction from "./containers/Auction";
+import Auctions from "./containers/Auction";
+import MyAuctions from "./containers/MyAuction";
+import Upcoming from "./containers/Upcoming";
 import Watercolours from "./containers/Watercolours";
+import About from "./containers/About";
 import history from "./utils/history";
+import Modal from "react-modal";
 
-function App() {
-  const [navbar, setNavbar] = useState(false);
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)"
+  }
+};
 
-  const centeredText = {
-    textAlign: "center"
-  };
+const centeredText = {
+  textAlign: "center"
+};
 
-  const navbarDisplay = () => {
-    setNavbar(!navbar);
-  };
+Modal.setAppElement("#root");
 
-  // const { loading } = useAuth0();
+class App extends React.Component {
+  constructor() {
+    super();
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+    this.state = {
+      modalIsOpen: false
+    };
 
-  return (
-    <div className="background" style={centeredText}>
-      <Router history={history}>
-        <header>{navbar === true && <NavBarMobile />}</header>
-        <h3 onClick={navbarDisplay}>MENU</h3>
-        <Switch>
-          <Route
-            path="/"
-            exact
-            component={LandingPage}
-            render={props => (
-              <LandingPage
-                {...props}
-                navbarDisplay={navbarDisplay}
-                navbar={navbar}
-              />
-            )}
-          />
-          <Route path="/profile" component={LandingPage} />
-          <Route path="/portraits" component={Portraits} />
-          <Route path="/watercolours" component={Watercolours} />
-          <Route path="/auction" component={Auction} />
-        </Switch>
-      </Router>
-    </div>
-  );
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({ modalIsOpen: true });
+  }
+
+  closeModal() {
+    this.setState({ modalIsOpen: false });
+  }
+
+  render() {
+    return (
+      <div style={centeredText}>
+        <Container>
+          <Router history={history}>
+            {/* show navbar modal */}
+            <h3 onClick={this.openModal}>MENU</h3>
+            <Modal
+              isOpen={this.state.modalIsOpen}
+              onRequestClose={this.closeModal}
+              style={customStyles}
+            >
+              <NavBarMobile close={() => this.closeModal()} />
+            </Modal>
+
+            {/* defining routes */}
+            <Switch>
+              <Route path="/" exact component={LandingPage} />
+              <Route path="/portraits" component={Portraits} />
+              <Route path="/about" component={About} />
+              <Route path="/auctions" exact component={Auctions} />
+              <Route path="/auctions/upcoming" component={Upcoming} />
+              <Route path="/myauction" component={MyAuctions} />
+              {/* <Route path="/auctions/past" component={Past} /> */}
+              {/* <Route path="/auctions/about" component={About} /> */}
+            </Switch>
+          </Router>
+        </Container>
+      </div>
+    );
+  }
 }
 
 export default App;

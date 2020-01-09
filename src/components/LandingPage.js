@@ -3,22 +3,19 @@ import React from "react";
 import { Grid, Image } from "semantic-ui-react";
 //mycomponents
 import drawings from "../Pap.jpg";
+import "../App.css";
 
 const LandingPage = () => {
   const centerImage = {
-    width: "90vw",
+    width: "95vw",
     margin: "0 auto"
   };
   return (
     <>
+      <h1>CAROLINE SEILERN ART</h1>
       <br />
       <br />
-      <Grid centered>
-        <h1>CAROLINE SEILERN ART</h1>
-      </Grid>
-      <br />
-      <br />
-      <Image src={drawings} style={centerImage} />
+      <img src={drawings} style={centerImage} />
     </>
   );
 };
