@@ -1,3 +1,5 @@
+import { identifier } from "@babel/types";
+
 const paintingURL = "http://localhost:3000/paintings/";
 const salesURL = "http://localhost:3000/sales/";
 const usersURL = "http://localhost:3000/users/";
@@ -10,8 +12,8 @@ const getBids = () => {
   return fetch(salesURL).then(resp => resp.json());
 };
 
-const getMyBids = email => {
-  return fetch(salesURL + email).then(resp => resp.json());
+const getMyBids = id => {
+  return fetch(usersURL + id).then(resp => resp.json());
 };
 
 const placeBid = (painting_id, user_id, bid_price, status) => {

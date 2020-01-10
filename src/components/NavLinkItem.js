@@ -17,7 +17,7 @@ const NavLinkItem = props => {
         }}
         onClick={props.close}
       >
-        {props.linkName.toUpperCase()}
+        {props.titleName.toUpperCase()}
       </NavLink>
     </>
   );
