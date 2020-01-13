@@ -25,7 +25,6 @@ const AuctionNav = props => {
   }, [loading]);
 
   if (loading || !user) {
-    console.log(loading);
     return <div>Loading...</div>;
   }
 

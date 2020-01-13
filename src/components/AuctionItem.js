@@ -26,6 +26,7 @@ const AuctionItem = props => {
   };
 
   useEffect(() => {
+    console.log(props);
     const time = props.auctionStarted ? props.item.end : props.item.start;
     if (difference === 0) return;
 
@@ -34,14 +35,17 @@ const AuctionItem = props => {
 
   return (
     <div>
-      {console.log(props)}
-      <img
-        src={"http://localhost:3001/assets/" + props.item.painting.url}
-        style={centerImage}
-      />
+      {props.item === undefined ? (
+        ""
+      ) : (
+        <img
+          src={"http://localhost:3001/assets/" + props.item.painting.url}
+          style={centerImage}
+        />
+      )}
       <p>
-        Starts in {days} days, {hours} hours, {minutes} minutes, {seconds}{" "}
-        seconds
+        {props.auctionStarted ? "Ends" : "Starts"} in {days} days, {hours}{" "}
+        hours, {minutes} minutes, {seconds} seconds
       </p>
     </div>
   );

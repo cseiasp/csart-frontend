@@ -11,25 +11,27 @@ const Auction = props => {
 
   const auctionOn = () => {
     const auctionOn = props.currentItem.length > 0;
-    setAuction(auctionOn);
+    return auctionOn;
   };
 
-  useEffect(() => {
-    auctionOn();
-  }, []);
-
+  // useEffect(() => {
+  //   auctionOn();
+  // }, [props.currentItem]);
+  console.log("auction", props.upcomingItems);
   return (
     <div>
       <h1>AUCTIONS</h1>
-      <AuctionNav auctionStarted={auction} />
-      {/* <AuctionItem
+      <AuctionNav
+        auctionStarted={props.currentItem.length > 0 ? true : false}
+      />
+      <AuctionItem
         item={
           props.currentItem.length > 0
-            ? props.currentItem[0]
+            ? props.currentItem
             : props.upcomingItems[0]
         }
-        auctionStarted={auction}
-      /> */}
+        auctionStarted={props.currentItem.length > 0 ? true : false}
+      />
     </div>
   );
 };
