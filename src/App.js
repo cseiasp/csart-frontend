@@ -16,6 +16,7 @@ import Auctions from "./containers/Auction";
 import MyAuctions from "./containers/MyAuction";
 import SetUp from "./containers/SetUp";
 import Upcoming from "./containers/Upcoming";
+import Current from "./containers/Current";
 import Watercolours from "./containers/Watercolours";
 import About from "./containers/About";
 import history from "./utils/history";
@@ -108,7 +109,18 @@ class App extends React.Component {
                   render={props => (
                     <Upcoming
                       {...props}
-                      auctionItems={this.state.auctionItems}
+                      upcomingItems={this.selectAuctionItemWithStatus(
+                        "upcoming"
+                      )}
+                    />
+                  )}
+                />
+                <Route
+                  path="/auctions/current"
+                  render={props => (
+                    <Current
+                      {...props}
+                      currentItem={this.selectAuctionItemWithStatus("current")}
                     />
                   )}
                 />
