@@ -25,13 +25,14 @@ const AuctionItem = props => {
     setDifference(difference);
   };
 
-  //   useEffect(() => {
-  //     console.log(props);
-  //     const time = props.auctionStarted ? props.item.end : props.item.start;
-  //     if (difference === 0) return;
+  useEffect(() => {
+    if (props.item !== undefined) {
+      const time = props.auctionStarted ? props.item.end : props.item.start;
+      if (difference === 0) return;
 
-  //     setInterval(() => timeLeft(time), 1000);
-  //   }, [seconds]);
+      setInterval(() => timeLeft(time), 1000);
+    }
+  }, [seconds, props.item]);
 
   return (
     <div>
