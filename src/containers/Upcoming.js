@@ -24,7 +24,8 @@ const Upcoming = () => {
     event.preventDefault();
     API.saveUser(email, newsletter)
       .then(user => API.placeBid(painting_id, user.id, bid_price, status))
-      .then(console.log);
+      // .then(bid => console.log(bid.new_bid));
+      .then(bid => addBid(bid.new_bid));
   };
 
   // defining state and auth
@@ -33,6 +34,10 @@ const Upcoming = () => {
   const [allBids, setAllBids] = useState([]);
   const [displayBids, setDisplayBids] = useState(false);
 
+  const addBid = bid => {
+    const newBids = [bid, ...allBids];
+    setAllBids(newBids);
+  };
   useEffect(() => {
     API.getBids().then(bids => setAllBids(bids));
   }, []);
@@ -48,7 +53,7 @@ const Upcoming = () => {
       <button>Bid on this piece</button>
       <form
         onSubmit={e =>
-          placeBidAndSaveUser(e, 1, bid, "bid placed", user.email, true)
+          placeBidAndSaveUser(e, 1, bid, "bid placed", user.sub, true)
         }
       >
         <label>

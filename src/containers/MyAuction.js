@@ -10,6 +10,7 @@ const MyAuction = () => {
 
   const getMyIdAndBids = () => {
     if (loading || !user) {
+      console.log(loading);
       return <div>Loading...</div>;
     } else {
       API.saveUser(user.sub, false)
@@ -21,16 +22,21 @@ const MyAuction = () => {
 
   useEffect(() => {
     getMyIdAndBids();
-  }, []);
+  }, [loading]);
+
+  const showBids = () => {
+    return myBids.map(bid => <p key={bid.id}> {bid} </p>);
+  };
 
   return (
     <div>
+      {console.log()}
       <h2>My Auction Bids</h2>
-      <p>
+      <div>
         {myBids.length !== 0
-          ? "bids"
+          ? showBids()
           : "You have not made any bids yet. To place a bid click here."}
-      </p>
+      </div>
     </div>
   );
 };

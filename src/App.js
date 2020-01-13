@@ -20,6 +20,7 @@ import Watercolours from "./containers/Watercolours";
 import About from "./containers/About";
 import history from "./utils/history";
 import Modal from "react-modal";
+import API from "./adapters/API";
 
 const customStyles = {
   content: {
@@ -43,7 +44,8 @@ class App extends React.Component {
     super();
 
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
+      auctionItems: []
     };
 
     this.openModal = this.openModal.bind(this);
@@ -56,6 +58,14 @@ class App extends React.Component {
 
   closeModal() {
     this.setState({ modalIsOpen: false });
+  }
+
+  selectAuctionItemWithStatus = status => {
+    return this.state.auctionItems.filter(item => item.status === status);
+  };
+
+  componentDidMount() {
+    API.getAuction().then(auctionItems => this.setState({ auctionItems }));
   }
 
   render() {
@@ -79,10 +89,31 @@ class App extends React.Component {
                 <Route path="/" exact component={LandingPage} />
                 <Route path="/portraits" component={Portraits} />
                 <Route path="/about" component={About} />
-                <Route path="/auctions" exact component={Auctions} />
-                <Route path="/auctions/upcoming" component={Upcoming} />
+                <Route
+                  path="/auctions"
+                  exact
+                  render={props => (
+                    <Auctions
+                      {...props}
+                      upcomingItems={this.selectAuctionItemWithStatus(
+                        "upcoming"
+                      )}
+                      pastItems={this.selectAuctionItemWithStatus("past")}
+                      currentItem={this.selectAuctionItemWithStatus("current")}
+                    />
+                  )}
+                />
+                <Route
+                  path="/auctions/upcoming"
+                  render={props => (
+                    <Upcoming
+                      {...props}
+                      auctionItems={this.state.auctionItems}
+                    />
+                  )}
+                />
                 <Route path="/myauction" component={MyAuctions} />
-                <Route path="/myauction/setup" component={SetUp} />
+                <Route path="/auctions/setup" component={SetUp} />
                 {/* <Route path="/auctions/past" component={Past} /> */}
                 {/* <Route path="/auctions/about" component={About} /> */}
               </Switch>

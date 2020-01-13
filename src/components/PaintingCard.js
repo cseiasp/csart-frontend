@@ -12,7 +12,7 @@ const PaintingCard = drawing => {
     <div>
       <img
         key={drawing.id}
-        src={"http://localhost:3001/assets/drawings/" + drawing.drawing.url}
+        src={"http://localhost:3001/assets/" + drawing.drawing.url}
         style={centerImage}
       />
       <p>

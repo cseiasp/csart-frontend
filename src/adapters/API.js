@@ -3,6 +3,7 @@ import { identifier } from "@babel/types";
 const paintingURL = "http://localhost:3000/paintings/";
 const salesURL = "http://localhost:3000/sales/";
 const usersURL = "http://localhost:3000/users/";
+const auctionURL = "http://localhost:3000/auctions/";
 
 const getPaintings = () => {
   return fetch(paintingURL).then(resp => resp.json());
@@ -14,6 +15,10 @@ const getBids = () => {
 
 const getMyBids = id => {
   return fetch(usersURL + id).then(resp => resp.json());
+};
+
+const getAuction = () => {
+  return fetch(auctionURL).then(resp => resp.json());
 };
 
 const placeBid = (painting_id, user_id, bid_price, status) => {
@@ -38,4 +43,23 @@ const saveUser = (email, newsletter) => {
   }).then(resp => resp.json());
 };
 
-export default { getPaintings, placeBid, saveUser, getBids, getMyBids };
+const setAuction = (painting, start, end, status) => {
+  return fetch(auctionURL, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ painting_id: painting, start, end, status })
+  }).then(resp => resp.json());
+};
+
+export default {
+  getPaintings,
+  placeBid,
+  saveUser,
+  getBids,
+  getMyBids,
+  getAuction,
+  setAuction
+};

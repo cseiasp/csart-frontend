@@ -20,11 +20,27 @@ const Payment = props => {
     if (response.ok) console.log("payment ok");
   };
 
+  const style = {
+    base: {
+      color: "#32325d",
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+      fontSmoothing: "antialiased",
+      fontSize: "16px",
+      "::placeholder": {
+        color: "#aab7c4"
+      }
+    },
+    invalid: {
+      color: "#fa755a",
+      iconColor: "#fa755a"
+    }
+  };
+
   return (
     <div className="checkout">
       <h1>ABOUT</h1>
 
-      <CardElement />
+      <CardElement style={style} />
       <button onClick={submit}>submit</button>
     </div>
   );
