@@ -54,6 +54,17 @@ const setAuction = (painting, start, end, status) => {
   }).then(resp => resp.json());
 };
 
+// const endOfAuction = () => {
+//   return fetch(salesURL, {
+//     method: "PATCH",
+//     headers: {
+//       Accept: "application/json",
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify({ painting_id, user_id, bid_price, status })
+//   }).then(resp => resp.json());
+// };
+
 export default {
   getPaintings,
   placeBid,

@@ -5,6 +5,7 @@ import { useAuth0 } from "../react-auth0-spa";
 import "../App.css";
 import API from "../adapters/API";
 import AllBids from "../components/AllBids";
+import CountdownTimer from "../components/CountdownTimer";
 
 const Upcoming = props => {
   const centerImage = {
@@ -48,12 +49,20 @@ const Upcoming = props => {
 
   return (
     <div>
-      <h1>UPCOMING AUCTIONS</h1>
+      <h1>LIVE AUCTION</h1>
+      <CountdownTimer item={props.currentItem} auctionStarted={true} />
       <img src={"http://localhost:3001/assets/Bunmi.jpg"} style={centerImage} />
       <button>Bid on this piece</button>
       <form
         onSubmit={e =>
-          placeBidAndSaveUser(e, 1, bid, "bid placed", user.sub, true)
+          placeBidAndSaveUser(
+            e,
+            props.currentItem.painting_id,
+            bid,
+            "bid placed",
+            user.sub,
+            true
+          )
         }
       >
         <label>

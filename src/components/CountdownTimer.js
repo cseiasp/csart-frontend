@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-const centerImage = {
-  width: "90vw",
-  margin: "0 auto"
-};
-
 const AuctionItem = props => {
   const [difference, setDifference] = useState("");
   const [days, setDays] = useState(0);
@@ -27,23 +22,18 @@ const AuctionItem = props => {
 
   useEffect(() => {
     if (props.item !== undefined) {
+      //if auction is ongoing, set countdown to end-date, otherwise set to start-date
       const time = props.auctionStarted ? props.item.end : props.item.start;
-      if (difference === 0) return;
-
+      //if auction is ongoing and end time has been hit, set auction bid winner
+      if (props.auctionStarted && difference === 0) {
+      } else if (difference === 0) return;
+      // show time countdown
       setInterval(() => timeLeft(time), 1000);
     }
   }, [seconds, props.item]);
 
   return (
     <div>
-      {props.item === undefined ? (
-        ""
-      ) : (
-        <img
-          src={"http://localhost:3001/assets/" + props.item.painting.url}
-          style={centerImage}
-        />
-      )}
       <p>
         {props.auctionStarted ? "Ends" : "Starts"} in {days} days, {hours}{" "}
         hours, {minutes} minutes, {seconds} seconds

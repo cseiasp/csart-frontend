@@ -127,11 +127,19 @@ class App extends React.Component {
                 render={props => (
                   <Current
                     {...props}
-                    currentItem={this.selectAuctionItemWithStatus("current")}
+                    currentItem={this.selectAuctionItemWithStatus("current")[0]}
                   />
                 )}
               />
-              <Route path="/myauction" component={MyAuctions} />
+              <Route
+                path="/myauction"
+                render={props => (
+                  <MyAuctions
+                    {...props}
+                    currentItem={this.selectAuctionItemWithStatus("current")[0]}
+                  />
+                )}
+              />
               <Route path="/auctions/setup" component={SetUp} />
               {/* <Route path="/auctions/past" component={Past} /> */}
               {/* <Route path="/auctions/about" component={About} /> */}

@@ -4,7 +4,7 @@ import { useAuth0 } from "../react-auth0-spa";
 //my components
 import API from "../adapters/API";
 
-const MyAuction = () => {
+const MyAuction = props => {
   const [myBids, setMyBids] = useState([]);
   const { loading, user } = useAuth0();
 
@@ -24,17 +24,28 @@ const MyAuction = () => {
     getMyIdAndBids();
   }, [loading]);
 
-  const showBids = () => {
+  const showAllBids = () => {
     return myBids.map(bid => <p key={bid.id}> {bid} </p>);
+  };
+  const showCurrentBids = () => {
+    const currentBids = myBids.filter(
+      bid => bid.painting_id === props.currentItem.painting_id
+    );
+    return currentBids.map(bid => <p key={bid.id}> {bid} </p>);
   };
 
   return (
     <div>
       {console.log()}
-      <h2>My Auction Bids</h2>
+      <h1>My Auction Bids</h1>
+      <h2>My Current Bids</h2>
+      {!props.currentItem || props.currentItem.length === 0
+        ? "You have not made any bids yet. To place a bid click here."
+        : showCurrentBids()}
+      <h2>All My Bids</h2>
       <div>
         {myBids.length !== 0
-          ? showBids()
+          ? showAllBids()
           : "You have not made any bids yet. To place a bid click here."}
       </div>
     </div>
