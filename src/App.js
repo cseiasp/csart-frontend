@@ -12,7 +12,7 @@ import "./App.css";
 import NavBarMobile from "./components/NavBarMobile";
 import LandingPage from "./components/LandingPage";
 import Portraits from "./containers/Portraits";
-import Auctions from "./containers/Auction";
+import Auction from "./containers/Auction";
 import MyAuctions from "./containers/MyAuction";
 import SetUp from "./containers/SetUp";
 import Upcoming from "./containers/Upcoming";
@@ -61,6 +61,22 @@ class App extends React.Component {
     this.setState({ modalIsOpen: false });
   }
 
+  auctionItems = () => {
+    if (this.selectAuctionItemWithStatus("current").length > 0) {
+      console.log(this.selectAuctionItemWithStatus("current"));
+      return {
+        items: this.selectAuctionItemWithStatus("current"),
+        auctionOn: true
+      };
+    } else {
+      console.log(this.selectAuctionItemWithStatus("upcoming"));
+      return {
+        items: this.selectAuctionItemWithStatus("upcoming"),
+        auctionOn: false
+      };
+    }
+  };
+
   selectAuctionItemWithStatus = status => {
     return this.state.auctionItems.filter(item => item.status === status);
   };
@@ -71,68 +87,59 @@ class App extends React.Component {
 
   render() {
     return (
-      <StripeProvider apiKey="pk_test_myvW8ymmcTyzOaUm8ljcy1fE00TO6LFJzY">
-        <div style={centeredText}>
-          <Container>
-            <Router history={history}>
-              {/* show navbar modal */}
-              <h3 onClick={this.openModal}>MENU</h3>
-              <Modal
-                isOpen={this.state.modalIsOpen}
-                onRequestClose={this.closeModal}
-                style={customStyles}
-              >
-                <NavBarMobile close={() => this.closeModal()} />
-              </Modal>
+      // <StripeProvider apiKey="pk_test_myvW8ymmcTyzOaUm8ljcy1fE00TO6LFJzY">
+      <div style={centeredText}>
+        <Container>
+          <Router history={history}>
+            {/* show navbar modal */}
+            <h3 onClick={this.openModal}>MENU</h3>
+            <Modal
+              isOpen={this.state.modalIsOpen}
+              onRequestClose={this.closeModal}
+              style={customStyles}
+            >
+              <NavBarMobile close={() => this.closeModal()} />
+            </Modal>
 
-              {/* defining routes */}
-              <Switch>
-                <Route path="/" exact component={LandingPage} />
-                <Route path="/portraits" component={Portraits} />
-                <Route path="/about" component={About} />
-                <Route
-                  path="/auctions"
-                  exact
-                  render={props => (
-                    <Auctions
-                      {...props}
-                      upcomingItems={this.selectAuctionItemWithStatus(
-                        "upcoming"
-                      )}
-                      pastItems={this.selectAuctionItemWithStatus("past")}
-                      currentItem={this.selectAuctionItemWithStatus("current")}
-                    />
-                  )}
-                />
-                <Route
-                  path="/auctions/upcoming"
-                  render={props => (
-                    <Upcoming
-                      {...props}
-                      upcomingItems={this.selectAuctionItemWithStatus(
-                        "upcoming"
-                      )}
-                    />
-                  )}
-                />
-                <Route
-                  path="/auctions/current"
-                  render={props => (
-                    <Current
-                      {...props}
-                      currentItem={this.selectAuctionItemWithStatus("current")}
-                    />
-                  )}
-                />
-                <Route path="/myauction" component={MyAuctions} />
-                <Route path="/auctions/setup" component={SetUp} />
-                {/* <Route path="/auctions/past" component={Past} /> */}
-                {/* <Route path="/auctions/about" component={About} /> */}
-              </Switch>
-            </Router>
-          </Container>
-        </div>
-      </StripeProvider>
+            {/* defining routes */}
+            <Switch>
+              <Route path="/" exact component={LandingPage} />
+              <Route path="/portraits" component={Portraits} />
+              {/* <Route path="/about" component={About} /> */}
+              <Route
+                path="/auctions"
+                exact
+                render={props => (
+                  <Auction {...props} auctionItems={this.auctionItems} />
+                )}
+              />
+              <Route
+                path="/auctions/upcoming"
+                render={props => (
+                  <Upcoming
+                    {...props}
+                    upcomingItems={this.selectAuctionItemWithStatus("upcoming")}
+                  />
+                )}
+              />
+              <Route
+                path="/auctions/current"
+                render={props => (
+                  <Current
+                    {...props}
+                    currentItem={this.selectAuctionItemWithStatus("current")}
+                  />
+                )}
+              />
+              <Route path="/myauction" component={MyAuctions} />
+              <Route path="/auctions/setup" component={SetUp} />
+              {/* <Route path="/auctions/past" component={Past} /> */}
+              {/* <Route path="/auctions/about" component={About} /> */}
+            </Switch>
+          </Router>
+        </Container>
+      </div>
+      // </StripeProvider>
     );
   }
 }
