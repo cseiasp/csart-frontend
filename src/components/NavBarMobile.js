@@ -28,28 +28,34 @@ const NavBarMobile = props => {
   return (
     <div style={navbarColors}>
       <NavLinkItem linkName="about" titleName="about" close={props.close} />
-
+      
       <Divider />
-
+      
       <NavLinkItem
         linkName="portraits"
         titleName="portraits"
         close={props.close}
       />
-
+      
       <Divider />
+      
       <NavLinkItem
         linkName="auctions"
         titleName="auctions"
         close={props.close}
       />
-
+      
       <Divider />
 
       {!isAuthenticated && (
-        <button onClick={() => loginWithRedirect({})} style={navbarColors}>
-          LOG IN
-        </button>
+        <>
+          <button onClick={() => loginWithRedirect({})} style={navbarColors}>
+            LOG IN
+          </button>
+          
+          
+          <Divider />
+        </>
       )}
       {/* only show logout when user is logged in */}
       {isAuthenticated && (

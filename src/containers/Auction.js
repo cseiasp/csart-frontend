@@ -12,11 +12,12 @@ const centerImage = {
 };
 
 const Auction = props => {
-  console.log("auction", props.auctionItems().items);
+
   return (
     <div>
       <h1>AUCTIONS</h1>
       <AuctionNav auctionStarted={props.auctionItems().auctionOn} />
+      
       <h2>
         {props.auctionItems().auctionOn
           ? "Live Auction Has Started"

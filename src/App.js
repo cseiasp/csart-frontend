@@ -18,7 +18,7 @@ import SetUp from "./containers/SetUp";
 import Upcoming from "./containers/Upcoming";
 import Current from "./containers/Current";
 import Watercolours from "./containers/Watercolours";
-import About from "./containers/About";
+import Purchase from "./containers/Purchase";
 import history from "./utils/history";
 import Modal from "react-modal";
 import API from "./adapters/API";
@@ -46,7 +46,8 @@ class App extends React.Component {
 
     this.state = {
       modalIsOpen: false,
-      auctionItems: []
+      auctionItems: [],
+      bidWinners: []
     };
 
     this.openModal = this.openModal.bind(this);
@@ -81,8 +82,16 @@ class App extends React.Component {
     return this.state.auctionItems.filter(item => item.status === status);
   };
 
+  setBidWin = bidWin => {
+    const bidWinners = [bidWin, ...this.state.bidWinners];
+    this.setState({ bidWinners });
+  };
+
   componentDidMount() {
-    API.getAuction().then(auctionItems => this.setState({ auctionItems }));
+    API.getAuction()
+      .then(auctionItems => this.setState({ auctionItems }))
+      .then(() => API.getWinners())
+      .then(bidWinners => this.setState({ bidWinners }));
   }
 
   render() {
@@ -105,7 +114,7 @@ class App extends React.Component {
             <Switch>
               <Route path="/" exact component={LandingPage} />
               <Route path="/portraits" component={Portraits} />
-              {/* <Route path="/about" component={About} /> */}
+              {/* <Route path="/purchase" component={Purchase} /> */}
               <Route
                 path="/auctions"
                 exact
@@ -128,6 +137,7 @@ class App extends React.Component {
                   <Current
                     {...props}
                     currentItem={this.selectAuctionItemWithStatus("current")[0]}
+                    setBidWin={this.setBidWin}
                   />
                 )}
               />
@@ -137,6 +147,7 @@ class App extends React.Component {
                   <MyAuctions
                     {...props}
                     currentItem={this.selectAuctionItemWithStatus("current")[0]}
+                    bidWinners={this.state.bidWinners}
                   />
                 )}
               />

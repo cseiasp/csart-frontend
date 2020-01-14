@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 //my components
 import API from "../adapters/API";
 
@@ -13,6 +14,7 @@ const SetUp = () => {
   const [endTime, setEndTime] = useState(11);
   const [painting, setPainting] = useState(1);
   const [status, setStatus] = useState("upcoming");
+  const history = useHistory();
 
   const setNewAuction = event => {
     event.preventDefault();
@@ -22,6 +24,7 @@ const SetUp = () => {
     const end = endDate.getTime();
     console.log(status);
     API.setAuction(painting, start, end, status).then(console.log);
+    history.push("/auctions");
   };
 
   return (

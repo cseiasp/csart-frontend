@@ -11,7 +11,6 @@ const AuctionNav = props => {
 
   const getMyId = () => {
     if (loading || !user) {
-      console.log(loading);
       return <div>Loading...</div>;
     } else {
       API.saveUser(user.sub, false)
@@ -24,18 +23,16 @@ const AuctionNav = props => {
     getMyId();
   }, [loading]);
 
-  if (loading || !user) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div>
       {props.auctionStarted && (
         <NavLinkItem linkName="auctions/current" titleName={" current |"} />
       )}
       <NavLinkItem linkName="auctions/upcoming" titleName={" upcoming "} />|
-      <NavLinkItem linkName="auctions/past" titleName=" past " /> |
-      <NavLinkItem linkName="auctions/about" titleName=" about " />
+      <NavLinkItem linkName="auctions/past" titleName=" past " />
+      {myId !== "" && (
+        <NavLinkItem linkName="myauction" titleName="| my auction " />
+      )}
       {myId === 5 && (
         <NavLinkItem linkName="auctions/setup" titleName="| set up " />
       )}

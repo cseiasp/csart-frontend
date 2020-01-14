@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 //authentication using Auth0
 import { useAuth0 } from "../react-auth0-spa";
 //my components
@@ -8,12 +9,19 @@ import AllBids from "../components/AllBids";
 import CountdownTimer from "../components/CountdownTimer";
 import BidForm from "../components/BidForm";
 
-const Upcoming = props => {
+const Current = props => {
   const centerImage = {
     width: "90vw",
     margin: "0 auto",
     padding: "3px"
   };
+
+  // defining state and auth
+  const { loading, user } = useAuth0();
+  const [bid, setBid] = useState("");
+  const [allBids, setAllBids] = useState([]);
+  const [displayBids, setDisplayBids] = useState(false);
+  const history = useHistory();
 
   const placeBidAndSaveUser = (
     event,
@@ -29,12 +37,6 @@ const Upcoming = props => {
       // .then(bid => console.log(bid.new_bid));
       .then(bid => addBid(bid.new_bid));
   };
-
-  // defining state and auth
-  const { loading, user } = useAuth0();
-  const [bid, setBid] = useState("");
-  const [allBids, setAllBids] = useState([]);
-  const [displayBids, setDisplayBids] = useState(false);
 
   const addBid = bid => {
     const newBids = [bid, ...allBids];
@@ -62,10 +64,23 @@ const Upcoming = props => {
     }
   };
 
+  const endOfAuction = () => {
+    API.endOfAuction(39, "successful")
+      .then(bid => props.setBidWin(bid.win.sale))
+      .then(() => API.setAuctionToPast(props.currentItem.id, "past"))
+      .then(history.push("/auctions"))
+      .catch(error => console.log(error));
+  };
+
   return (
     <div>
       <h1>LIVE AUCTION</h1>
-      <CountdownTimer item={props.currentItem} auctionStarted={true} />
+      {!loading && <button onClick={endOfAuction}>Demo: End of Auction</button>}
+      <CountdownTimer
+        item={props.currentItem}
+        auctionStarted={true}
+        setBidWin={props.setBidWin}
+      />
       <img src={"http://localhost:3001/assets/Bunmi.jpg"} style={centerImage} />
       <button>Bid on this piece</button>
       {placeBidForm()}
@@ -77,4 +92,4 @@ const Upcoming = props => {
   );
 };
 
-export default Upcoming;
+export default Current;

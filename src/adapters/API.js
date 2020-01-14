@@ -4,7 +4,9 @@ const paintingURL = "http://localhost:3000/paintings/";
 const salesURL = "http://localhost:3000/sales/";
 const usersURL = "http://localhost:3000/users/";
 const auctionURL = "http://localhost:3000/auctions/";
+const winningsURL = "http://localhost:3000/winnings";
 
+//get requests
 const getPaintings = () => {
   return fetch(paintingURL).then(resp => resp.json());
 };
@@ -21,6 +23,11 @@ const getAuction = () => {
   return fetch(auctionURL).then(resp => resp.json());
 };
 
+const getWinners = () => {
+  return fetch(winningsURL).then(resp => resp.json());
+};
+
+//post requests
 const placeBid = (painting_id, user_id, bid_price, status) => {
   return fetch(salesURL, {
     method: "POST",
@@ -54,6 +61,7 @@ const setAuction = (painting, start, end, status) => {
   }).then(resp => resp.json());
 };
 
+//patch requests
 const endOfAuction = (id, status) => {
   return fetch(salesURL + id, {
     method: "PATCH",
@@ -85,5 +93,6 @@ export default {
   getAuction,
   setAuction,
   endOfAuction,
-  setAuctionToPast
+  setAuctionToPast,
+  getWinners
 };
