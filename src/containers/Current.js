@@ -76,7 +76,7 @@ const Upcoming = props => {
         <input type="submit" value="Submit" />
       </form>
       <h1>Highest Bid:</h1>
-      <h2> {allBids[0]}</h2>
+      <h2> {allBids[0].display_text}</h2>
       <h1 onClick={() => setDisplayBids(!displayBids)}>All Bids</h1>
       {displayBids && <AllBids allBids={allBids} />}
     </div>
