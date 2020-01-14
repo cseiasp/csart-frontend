@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+//my components
+import API from "../adapters/API";
 
 const AuctionItem = props => {
   const [difference, setDifference] = useState("");
@@ -26,6 +28,11 @@ const AuctionItem = props => {
       const time = props.auctionStarted ? props.item.end : props.item.start;
       //if auction is ongoing and end time has been hit, set auction bid winner
       if (props.auctionStarted && difference === 0) {
+        API.endOfAuction(39, "successful")
+          .then(() => API.setAuctionToPast(props.item.id, "past"))
+          .then(console.log)
+          .catch(error => console.log(error));
+        return;
       } else if (difference === 0) return;
       // show time countdown
       setInterval(() => timeLeft(time), 1000);

@@ -25,13 +25,13 @@ const MyAuction = props => {
   }, [loading]);
 
   const showAllBids = () => {
-    return myBids.map(bid => <p key={bid.id}> {bid} </p>);
+    return myBids.map(bid => <p key={bid.id}> {bid.display_text} </p>);
   };
   const showCurrentBids = () => {
     const currentBids = myBids.filter(
       bid => bid.painting_id === props.currentItem.painting_id
     );
-    return currentBids.map(bid => <p key={bid.id}> {bid} </p>);
+    return currentBids.map(bid => <p key={bid.id}> {bid.display_text} </p>);
   };
 
   return (

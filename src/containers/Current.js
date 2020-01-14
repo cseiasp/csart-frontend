@@ -6,6 +6,7 @@ import "../App.css";
 import API from "../adapters/API";
 import AllBids from "../components/AllBids";
 import CountdownTimer from "../components/CountdownTimer";
+import BidForm from "../components/BidForm";
 
 const Upcoming = props => {
   const centerImage = {
@@ -43,9 +44,23 @@ const Upcoming = props => {
     API.getBids().then(bids => setAllBids(bids));
   }, []);
 
-  if (loading || !user) {
-    return <div>Loading...</div>;
-  }
+  const placeBidForm = () => {
+    if (loading) {
+      return <div>Loading...</div>;
+    } else if (!user) {
+      return <div>Please log in to place a bid</div>;
+    } else {
+      return (
+        <BidForm
+          placeBidAndSaveUser={placeBidAndSaveUser}
+          painting_id={props.currentItem.painting_id}
+          user={user.sub}
+          bid={bid}
+          setBid={setBid}
+        />
+      );
+    }
+  };
 
   return (
     <div>
@@ -53,30 +68,9 @@ const Upcoming = props => {
       <CountdownTimer item={props.currentItem} auctionStarted={true} />
       <img src={"http://localhost:3001/assets/Bunmi.jpg"} style={centerImage} />
       <button>Bid on this piece</button>
-      <form
-        onSubmit={e =>
-          placeBidAndSaveUser(
-            e,
-            props.currentItem.painting_id,
-            bid,
-            "bid placed",
-            user.sub,
-            true
-          )
-        }
-      >
-        <label>
-          Bid:
-          <input
-            type="text"
-            name="bid"
-            onChange={e => setBid(e.target.value)}
-          />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      {placeBidForm()}
       <h1>Highest Bid:</h1>
-      <h2> {allBids[0].display_text}</h2>
+      <h2> {allBids[0] !== undefined && allBids[0].display_text}</h2>
       <h1 onClick={() => setDisplayBids(!displayBids)}>All Bids</h1>
       {displayBids && <AllBids allBids={allBids} />}
     </div>
