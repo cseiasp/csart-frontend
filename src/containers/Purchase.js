@@ -7,9 +7,8 @@ import { CardElement, injectStripe, Elements } from "react-stripe-elements";
 import Payment from "./Payment";
 import WinningBid from "../components/WinningBid";
 import API from "../adapters/API";
-import NavLinkItem from "../components/NavLinkItem";
 
-const Purchase = props => {
+const Purchase = ({ winningBids, bidWinners }) => {
   const [myId, setMyId] = useState("");
   const [paymentOk, setPaymentOk] = useState(false);
   const { loading, user } = useAuth0();
@@ -24,13 +23,6 @@ const Purchase = props => {
     }
   };
 
-  const displayWinningBids = () => {
-    const myWin = props.bidWinners.filter(win => win.sale.user_id === myId)[0];
-    return (
-      <>{myWin !== undefined && <WinningBid key={myWin.id} bid={myWin} />}</>
-    );
-  };
-
   useEffect(() => {
     getMyId();
   }, [loading]);
@@ -43,7 +35,7 @@ const Purchase = props => {
     return (
       <div>
         <h1>BASKET</h1>
-        {props.bidWinners.length > 0 && displayWinningBids()}
+        {bidWinners.length > 0 && winningBids()}
         <Elements>
           <Payment setPaymentOk={setPaymentOk} />
         </Elements>

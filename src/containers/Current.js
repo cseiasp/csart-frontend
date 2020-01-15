@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 //authentication using Auth0
 import { useAuth0 } from "../react-auth0-spa";
 //my components
@@ -16,9 +15,7 @@ const Current = ({
   endOfAuction,
   bid,
   setBid,
-  allBids,
-  setDisplayBids,
-  displayBids
+  allBids
 }) => {
   const centerImage = {
     width: "90vw",
@@ -28,6 +25,7 @@ const Current = ({
 
   // defining state and auth
   const { loading, user } = useAuth0();
+  const [displayBids, setDisplayBids] = useState(false);
 
   const placeBidForm = () => {
     if (loading) {

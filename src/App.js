@@ -1,6 +1,8 @@
 //react
 import React, { useState, useEffect } from "react";
 import { Router, Route, Switch, useHistory } from "react-router-dom";
+//modal
+import Modal from "react-modal";
 //authentication using Auth0
 import { useAuth0 } from "./react-auth0-spa";
 //stripe
@@ -19,8 +21,9 @@ import Upcoming from "./containers/Upcoming";
 import Current from "./containers/Current";
 import Watercolours from "./containers/Watercolours";
 import Purchase from "./containers/Purchase";
-import history from "./utils/history";
-import Modal from "react-modal";
+import WinningBid from "./components/WinningBid";
+import NavLinkItem from "./components/NavLinkItem";
+
 import API from "./adapters/API";
 
 const customStyles = {
@@ -41,13 +44,17 @@ const centeredText = {
 Modal.setAppElement("#root");
 
 const App = () => {
-  // defining state and auth
+  // auth
   const { loading, user } = useAuth0();
+  //state for myAuction
+  const [myBids, setMyBids] = useState([]);
+  const [myId, setMyId] = useState("");
+  //state for current
   const [bid, setBid] = useState("");
   const [allBids, setAllBids] = useState([]);
-  const [displayBids, setDisplayBids] = useState(false);
+
   const history = useHistory();
-  //state
+  //state for App
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [auctionItems, setAuctionItems] = useState([]);
   const [bidWinners, setBidWinners] = useState([]);
@@ -126,11 +133,51 @@ const App = () => {
       .catch(error => console.log(error));
   };
 
+  // functions for myAuction component
+  const setUserAndBids = user => {
+    setMyBids(user.bids);
+    setMyId(user.user.id);
+  };
+
+  const getMyIdAndBids = () => {
+    if (loading || !user) {
+      return <div>Loading...</div>;
+    } else {
+      API.saveUser(user.sub, false)
+        .then(userInfo => API.getMyBids(userInfo.id))
+        .then(user => setUserAndBids(user))
+        .catch(errors => console.log(errors));
+    }
+  };
+  //for purchase and myAuction components
+
+  const displayWinningBids = () => {
+    if (loading) {
+      return <div>loading...</div>;
+    } else {
+      return (
+        <>
+          <p>You have a winning bid</p>
+          {winningBids()}
+          <NavLinkItem linkName="purchase" titleName={"purchase now"} />
+        </>
+      );
+    }
+  };
+
+  const winningBids = () => {
+    const myWin = bidWinners.filter(win => win.sale.user_id === myId)[0];
+    return (
+      <>{myWin !== undefined && <WinningBid key={myWin.id} bid={myWin} />}</>
+    );
+  };
+
   useEffect(() => {
     API.getAuction().then(auctionItems => setAuctionItems(auctionItems));
     API.getWinners().then(bidWinners => setBidWinners(bidWinners));
     API.getBids().then(bids => setAllBids(bids));
-  }, []);
+    getMyIdAndBids();
+  }, [loading]);
 
   return (
     <StripeProvider apiKey="pk_test_myvW8ymmcTyzOaUm8ljcy1fE00TO6LFJzY">
@@ -156,7 +203,8 @@ const App = () => {
                 <Purchase
                   {...props}
                   currentItem={selectAuctionItemWithStatus("current")[0]}
-                  bidWinners={bidWinners}
+                  bidWinners= {bidWinners}
+                  winningBids={winningBids}
                 />
               )}
             />
@@ -187,8 +235,6 @@ const App = () => {
                   bid={bid}
                   setBid={setBid}
                   allBids={allBids}
-                  setDisplayBids={setDisplayBids}
-                  displayBids={displayBids}
                 />
               )}
             />
@@ -199,6 +245,9 @@ const App = () => {
                   {...props}
                   currentItem={selectAuctionItemWithStatus("current")[0]}
                   bidWinners={bidWinners}
+                  myBids={myBids}
+                  myId={myId}
+                  displayWinningBids={displayWinningBids}
                 />
               )}
             />
