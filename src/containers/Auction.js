@@ -11,30 +11,30 @@ const centerImage = {
   margin: "0 auto"
 };
 
-const Auction = props => {
+const Auction = ({auctionItems, myId}) => {
 
   return (
     <div>
       <h1>AUCTIONS</h1>
-      <AuctionNav auctionStarted={props.auctionItems().auctionOn} />
+      <AuctionNav auctionStarted={auctionItems().auctionOn} myId = {myId}/>
       
       <h2>
-        {props.auctionItems().auctionOn
+        {auctionItems().auctionOn
           ? "Live Auction Has Started"
           : "Next Auction:"}
       </h2>
       <CountdownTimer
-        item={props.auctionItems().items[0]}
-        auctionStarted={props.auctionItems().auctionOn}
+        item={auctionItems().items[0]}
+        auctionStarted={auctionItems().auctionOn}
       />
-      {console.log(props.auctionItems().items[0])}
-      {props.auctionItems().items[0] === undefined ? (
+      {console.log(auctionItems().items[0])}
+      {auctionItems().items[0] === undefined ? (
         ""
       ) : (
         <img
           src={
             "http://localhost:3001/assets/" +
-            props.auctionItems().items[0].painting.url
+            auctionItems().items[0].painting.url
           }
           style={centerImage}
         />

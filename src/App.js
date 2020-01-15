@@ -125,8 +125,9 @@ const App = () => {
 
   const endOfAuction = () => {
     const currentItem = selectAuctionItemWithStatus("current")[0];
-    API.endOfAuction(39, "successful")
-      .then(bid => defineBidWin(bid.win.sale))
+    const winningBidId = allBids[0].sale.id;
+    API.endOfAuction(winningBidId, "successful")
+      .then(bid => defineBidWin(bid.win))
       .then(() => API.setAuctionToPast(currentItem.id, "past"))
       .then(item => setItemToPast(item.id))
       .then(history.push("/auctions"))
@@ -166,6 +167,7 @@ const App = () => {
   };
 
   const winningBids = () => {
+    console.log("winning bids", bidWinners);
     const myWin = bidWinners.filter(win => win.sale.user_id === myId)[0];
     return (
       <>{myWin !== undefined && <WinningBid key={myWin.id} bid={myWin} />}</>
@@ -203,7 +205,7 @@ const App = () => {
                 <Purchase
                   {...props}
                   currentItem={selectAuctionItemWithStatus("current")[0]}
-                  bidWinners= {bidWinners}
+                  bidWinners={bidWinners}
                   winningBids={winningBids}
                 />
               )}
@@ -212,7 +214,11 @@ const App = () => {
               path="/auctions"
               exact
               render={props => (
-                <Auction {...props} auctionItems={defineAuctionItems} />
+                <Auction
+                  {...props}
+                  auctionItems={defineAuctionItems}
+                  myId={myId}
+                />
               )}
             />
             <Route

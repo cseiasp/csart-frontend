@@ -5,27 +5,10 @@ import { useAuth0 } from "../react-auth0-spa";
 import API from "../adapters/API";
 import NavLinkItem from "../components/NavLinkItem";
 
-const AuctionNav = props => {
-  const [myId, setMyId] = useState("");
-  const { loading, user } = useAuth0();
-
-  const getMyId = () => {
-    if (loading || !user) {
-      return <div>Loading...</div>;
-    } else {
-      API.saveUser(user.sub, false)
-        .then(user => setMyId(user.id))
-        .catch(errors => console.log(errors));
-    }
-  };
-
-  useEffect(() => {
-    getMyId();
-  }, [loading]);
-
+const AuctionNav = ({ myId, auctionStarted }) => {
   return (
     <div>
-      {props.auctionStarted && (
+      {auctionStarted && (
         <NavLinkItem linkName="auctions/current" titleName={" current |"} />
       )}
       <NavLinkItem linkName="auctions/upcoming" titleName={" upcoming "} />|
