@@ -4,6 +4,7 @@ import { useAuth0 } from "../react-auth0-spa";
 //my components
 import API from "../adapters/API";
 import WinningBid from "../components/WinningBid";
+import NavLinkItem from "../components/NavLinkItem";
 
 const MyAuction = props => {
   const [myBids, setMyBids] = useState([]);
@@ -53,6 +54,7 @@ const MyAuction = props => {
           {myWins.map(win => (
             <WinningBid key={win.id} bid={win} />
           ))}
+          <NavLinkItem linkName="purchase" titleName={"purchase now"} />
         </>
       );
     }

@@ -1,4 +1,5 @@
 import React from "react";
+//my components
 
 const WinningBid = props => {
   const centerImage = {
@@ -12,7 +13,6 @@ const WinningBid = props => {
         style={centerImage}
       />
       <p>Bid Placed: {props.bid.display_text}</p>
-      <button>Purchase Now</button>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 //react
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 //stripe
 import { StripeProvider } from "react-stripe-elements";
@@ -40,86 +40,100 @@ const centeredText = {
 
 Modal.setAppElement("#root");
 
-class App extends React.Component {
-  constructor() {
-    super();
+const App = () => {
+  // constructor() {
+  //   super();
 
-    this.state = {
-      modalIsOpen: false,
-      auctionItems: [],
-      bidWinners: []
-    };
+  //   this.state = {
+  //     modalIsOpen: false,
+  //     auctionItems: [],
+  //     bidWinners: [],
+  //     myWins: []
+  //   };
 
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
+  //   this.openModal = this.openModal.bind(this);
+  //   this.closeModal = this.closeModal.bind(this);
+  // }
 
-  openModal() {
-    this.setState({ modalIsOpen: true });
-  }
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [auctionItems, setAuctionItems] = useState([]);
+  const [bidWinners, setBidWinners] = useState([]);
+  const [myWins, setMyWins] = useState([]);
 
-  closeModal() {
-    this.setState({ modalIsOpen: false });
-  }
+  const openOrCloseModal = () => {
+    setModalIsOpen(!modalIsOpen);
+  };
 
-  auctionItems = () => {
-    if (this.selectAuctionItemWithStatus("current").length > 0) {
-      console.log(this.selectAuctionItemWithStatus("current"));
+  const defineAuctionItems = () => {
+    if (selectAuctionItemWithStatus("current").length > 0) {
+      console.log(selectAuctionItemWithStatus("current"));
       return {
-        items: this.selectAuctionItemWithStatus("current"),
+        items: selectAuctionItemWithStatus("current"),
         auctionOn: true
       };
     } else {
-      console.log(this.selectAuctionItemWithStatus("upcoming"));
+      console.log(selectAuctionItemWithStatus("upcoming"));
       return {
-        items: this.selectAuctionItemWithStatus("upcoming"),
+        items: selectAuctionItemWithStatus("upcoming"),
         auctionOn: false
       };
     }
   };
 
-  selectAuctionItemWithStatus = status => {
-    return this.state.auctionItems.filter(item => item.status === status);
+  const selectAuctionItemWithStatus = status => {
+    return auctionItems.filter(item => item.status === status);
   };
 
-  setBidWin = bidWin => {
-    const bidWinners = [bidWin, ...this.state.bidWinners];
-    this.setState({ bidWinners });
+  const defineBidWin = bidWin => {
+    const bidWinners = [bidWin, ...bidWinners];
+    setBidWinners(bidWinners);
   };
 
-  componentDidMount() {
+  const defineMyWins = myWins => {
+    setMyWins(myWins);
+  };
+
+  useEffect(() => {
     API.getAuction()
-      .then(auctionItems => this.setState({ auctionItems }))
+      .then(auctionItems => setAuctionItems(auctionItems))
       .then(() => API.getWinners())
-      .then(bidWinners => this.setState({ bidWinners }));
-  }
+      .then(bidWinners => setBidWinners(bidWinners));
+  }, []);
 
-  render() {
-    return (
-      // <StripeProvider apiKey="pk_test_myvW8ymmcTyzOaUm8ljcy1fE00TO6LFJzY">
+  return (
+    <StripeProvider apiKey="pk_test_myvW8ymmcTyzOaUm8ljcy1fE00TO6LFJzY">
       <div style={centeredText}>
         <Container>
           <Router history={history}>
             {/* show navbar modal */}
-            <h3 onClick={this.openModal}>MENU</h3>
+            <h3 onClick={openOrCloseModal}>MENU</h3>
             <Modal
-              isOpen={this.state.modalIsOpen}
-              onRequestClose={this.closeModal}
+              isOpen={modalIsOpen}
+              onRequestClose={openOrCloseModal}
               style={customStyles}
             >
-              <NavBarMobile close={() => this.closeModal()} />
+              <NavBarMobile close={() => openOrCloseModal()} />
             </Modal>
 
             {/* defining routes */}
             <Switch>
               <Route path="/" exact component={LandingPage} />
               <Route path="/portraits" component={Portraits} />
-              {/* <Route path="/purchase" component={Purchase} /> */}
+              <Route
+                path="/purchase"
+                render={props => (
+                  <Purchase
+                    {...props}
+                    currentItem={selectAuctionItemWithStatus("current")[0]}
+                    bidWinners={bidWinners}
+                  />
+                )}
+              />
               <Route
                 path="/auctions"
                 exact
                 render={props => (
-                  <Auction {...props} auctionItems={this.auctionItems} />
+                  <Auction {...props} auctionItems={defineAuctionItems} />
                 )}
               />
               <Route
@@ -127,7 +141,7 @@ class App extends React.Component {
                 render={props => (
                   <Upcoming
                     {...props}
-                    upcomingItems={this.selectAuctionItemWithStatus("upcoming")}
+                    upcomingItems={selectAuctionItemWithStatus("upcoming")}
                   />
                 )}
               />
@@ -136,8 +150,8 @@ class App extends React.Component {
                 render={props => (
                   <Current
                     {...props}
-                    currentItem={this.selectAuctionItemWithStatus("current")[0]}
-                    setBidWin={this.setBidWin}
+                    currentItem={selectAuctionItemWithStatus("current")[0]}
+                    setBidWin={defineBidWin}
                   />
                 )}
               />
@@ -146,8 +160,8 @@ class App extends React.Component {
                 render={props => (
                   <MyAuctions
                     {...props}
-                    currentItem={this.selectAuctionItemWithStatus("current")[0]}
-                    bidWinners={this.state.bidWinners}
+                    currentItem={selectAuctionItemWithStatus("current")[0]}
+                    bidWinners={bidWinners}
                   />
                 )}
               />
@@ -158,9 +172,8 @@ class App extends React.Component {
           </Router>
         </Container>
       </div>
-      // </StripeProvider>
-    );
-  }
-}
+    </StripeProvider>
+  );
+};
 
 export default App;

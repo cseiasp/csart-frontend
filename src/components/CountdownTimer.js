@@ -41,6 +41,9 @@ const AuctionItem = props => {
       }
       // show time countdown
       setInterval(() => timeLeft(time), 1000);
+      return () => {
+        clearInterval(time);
+      };
     }
   }, [seconds, props.item]);
 
