@@ -9,7 +9,17 @@ import AllBids from "../components/AllBids";
 import CountdownTimer from "../components/CountdownTimer";
 import BidForm from "../components/BidForm";
 
-const Current = props => {
+const Current = ({
+  placeBidAndSaveUser,
+  setBidWin,
+  currentItem,
+  endOfAuction,
+  bid,
+  setBid,
+  allBids,
+  setDisplayBids,
+  displayBids
+}) => {
   const centerImage = {
     width: "90vw",
     margin: "0 auto",
@@ -18,33 +28,6 @@ const Current = props => {
 
   // defining state and auth
   const { loading, user } = useAuth0();
-  const [bid, setBid] = useState("");
-  const [allBids, setAllBids] = useState([]);
-  const [displayBids, setDisplayBids] = useState(false);
-  const history = useHistory();
-
-  const placeBidAndSaveUser = (
-    event,
-    painting_id,
-    bid_price,
-    status,
-    email,
-    newsletter
-  ) => {
-    event.preventDefault();
-    API.saveUser(email, newsletter)
-      .then(user => API.placeBid(painting_id, user.id, bid_price, status))
-      // .then(bid => console.log(bid.new_bid));
-      .then(bid => addBid(bid.new_bid));
-  };
-
-  const addBid = bid => {
-    const newBids = [bid, ...allBids];
-    setAllBids(newBids);
-  };
-  useEffect(() => {
-    API.getBids().then(bids => setAllBids(bids));
-  }, []);
 
   const placeBidForm = () => {
     if (loading) {
@@ -55,7 +38,7 @@ const Current = props => {
       return (
         <BidForm
           placeBidAndSaveUser={placeBidAndSaveUser}
-          painting_id={props.currentItem.painting_id}
+          painting_id={currentItem.painting_id}
           user={user.sub}
           bid={bid}
           setBid={setBid}
@@ -64,22 +47,14 @@ const Current = props => {
     }
   };
 
-  const endOfAuction = () => {
-    API.endOfAuction(39, "successful")
-      .then(bid => props.setBidWin(bid.win.sale))
-      .then(() => API.setAuctionToPast(props.currentItem.id, "past"))
-      .then(history.push("/auctions"))
-      .catch(error => console.log(error));
-  };
-
   return (
     <div>
       <h1>LIVE AUCTION</h1>
       {!loading && <button onClick={endOfAuction}>Demo: End of Auction</button>}
       <CountdownTimer
-        item={props.currentItem}
+        item={currentItem}
         auctionStarted={true}
-        setBidWin={props.setBidWin}
+        setBidWin={setBidWin}
       />
       <img src={"http://localhost:3001/assets/Bunmi.jpg"} style={centerImage} />
       <button>Bid on this piece</button>

@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 //my components
 import API from "../adapters/API";
 
-const SetUp = () => {
+const SetUp = ({ setAuctionItems, auctionItems }) => {
   const [day, setDay] = useState(14);
   const [month, setMonth] = useState(0);
   const [year, setYear] = useState(2020);
@@ -23,7 +23,9 @@ const SetUp = () => {
     const endDate = new Date(endYear, endMonth, endDay, endTime);
     const end = endDate.getTime();
     console.log(status);
-    API.setAuction(painting, start, end, status).then(console.log);
+    API.setAuction(painting, start, end, status).then(item =>
+      setAuctionItems([...auctionItems, item])
+    );
     history.push("/auctions");
   };
 
@@ -118,7 +120,7 @@ const SetUp = () => {
         <label>
           Auction Status:
           <select onChange={e => setStatus(e.target.value)}>
-            <option selected value="select">
+            <option defaultValue value="select">
               Select One
             </option>
             <option value="upcoming">Upcoming</option>
