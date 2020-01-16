@@ -9,33 +9,89 @@ import "../App.css";
 export class Portraits extends Component {
   state = {
     paintings: [],
-    drawings: []
+    drawings: [],
+    drawingsShowing: true,
+    scrollPosition: ""
+  };
+
+  displayPortraits = () => {
+    if (this.state.drawingsShowing) {
+      return this.state.drawings.map(drawing => (
+        <PaintingCard drawing={drawing} key={drawing.id} type="Drawings" />
+      ));
+    } else {
+      return this.state.paintings.map(drawing => (
+        <PaintingCard drawing={drawing} key={drawing.id} type="paintings" />
+      ));
+    }
+  };
+
+  portraitsNav = (colour, type) => {
+    return (
+      <>
+        <p
+          className={type}
+          style={{ color: colour }}
+          onClick={() => this.setState({ drawingsShowing: true })}
+        >
+          DRAWINGS |&nbsp;
+        </p>
+        <p
+          className={type}
+          style={{ color: colour }}
+          onClick={() => this.setState({ drawingsShowing: false })}
+        >
+          PAINTINGS
+        </p>
+      </>
+    );
+  };
+
+  displayTitle = () => {
+    if (this.state.scrollPosition < 30) {
+      return <h1>PORTRAITS</h1>;
+    } else if (this.state.scrollPosition < 40) {
+      return <h1 style={{ color: "white" }}>PORTRAITS</h1>;
+    } else if (this.state.scrollPosition < 4880) {
+      return (
+        <div className="border">
+          {this.portraitsNav("black", "portraitHeaderP")}
+        </div>
+      );
+    } else {
+      return (
+        <h1 style={{ color: "white", borderColor: "white" }}>PORTRAITS</h1>
+      );
+    }
   };
 
   componentDidMount() {
+    window.addEventListener("scroll", () =>
+      this.setState({ scrollPosition: window.pageYOffset })
+    );
     API.getPaintings().then(portraits =>
-      this.setState({ drawings: portraits.drawings })
+      this.setState({
+        drawings: portraits.drawings,
+        paintings: portraits.paintings
+      })
+    );
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", () =>
+      this.setState({ scrollPosition: window.pageYOffset })
     );
   }
 
   render() {
-    
     return (
       <div>
-        {/* {!!this.props.navbar && this.props.navbarDisplay} */}
-        <h1>PORTRAITS</h1>
+        {this.displayTitle()}
 
-        {this.state.drawings.map(
-          drawing => (
-            <PaintingCard drawing={drawing} key={drawing.id} />
-          )
-
-          //   <img
-          //     key={drawing.id}
-          //     src={"http://localhost:3001/assets/drawings/" + drawing.url}
-          //     style={centerImage}
-          //   />
-        )}
+        {this.state.scrollPosition < 30
+          ? this.portraitsNav("black", "portraitSmallP")
+          : this.portraitsNav("white", "portraitSmallP")}
+        {this.displayPortraits()}
       </div>
     );
   }

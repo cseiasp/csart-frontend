@@ -1,23 +1,90 @@
-@import url("https://fonts.googleapis.com/css?family=Josefin+Sans");
+@font-face {
+  font-family: "Simplifica";
+  src: url("SIMPLIFICATypeface.ttf") format("truetype");
+}
 
 .app {
   text-align: center;
 }
 
-.body {
-  font-family: "Josefin Sans";
+.modalImage {
+  background-image: url("http://localhost:3001/assets/Bunmi.jpg");
+}
+
+.transparentClass {
+  opacity: 0;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+.stickyPainting {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 9rem;
+  height: 90vh;
+  background-color: white;
+  text-align: left;
 }
 
 h1 {
   border-top: 1px solid;
   border-bottom: 1px solid;
+  border-color: black;
   text-align: center;
-  padding: 10px;
+  padding-top: 10px;
+  background-color: white;
+  /* padding-bottom: px; */
+  font-size: 55px;
+  font-family: "Simplifica";
+  position: -webkit-sticky;
+  position: sticky;
+  top: 2.5rem;
+}
+
+.border {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-color: black;
+  text-align: center;
+  height: 82px;
+  background-color: white;
+  /* padding-bottom: px; */
+  font-size: 45px;
+  font-family: "Simplifica";
+  position: -webkit-sticky;
+  position: sticky;
+  top: 2.5rem;
+}
+
+.portraitHeaderP {
+  display: inline-block;
+  line-height: 82px;
+}
+.portraitSmallP {
+  display: inline-block;
+}
+
+.height-crop {
+  height: 25vh;
+  overflow: hidden;
+}
+
+.height-crop img {
+  margin-top: -50%;
 }
 
 .centerImage {
-  width: "95vw";
-  margin: "0 auto";
+  width: 95vw;
+  margin: 0 auto;
+}
+
+.centeredText {
+  text-align: center;
 }
 
 .MyCardElement {

@@ -34,11 +34,8 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)"
+    // backgroundImage: "url(http://localhost:3001/assets/background.jpg)"
   }
-};
-
-const centeredText = {
-  textAlign: "center"
 };
 
 Modal.setAppElement("#root");
@@ -183,10 +180,17 @@ const App = () => {
 
   return (
     <StripeProvider apiKey="pk_test_myvW8ymmcTyzOaUm8ljcy1fE00TO6LFJzY">
-      <div style={centeredText}>
+      <div className="centeredText">
         <Container>
           {/* show navbar modal */}
-          <h3 onClick={openOrCloseModal}>MENU</h3>
+          <h3
+            className="sticky"
+            onClick={openOrCloseModal}
+            // style={{ fontFamily: "Simplifica" }}
+          >
+            MENU
+          </h3>
+
           <Modal
             isOpen={modalIsOpen}
             onRequestClose={openOrCloseModal}

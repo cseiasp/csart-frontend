@@ -3,21 +3,22 @@ import React, { useState, useEffect } from "react";
 import { useAuth0 } from "../react-auth0-spa";
 //my components
 import API from "../adapters/API";
+import "../App.css";
 import AuctionNav from "../components/AuctionNav";
 import CountdownTimer from "../components/CountdownTimer";
 
 const centerImage = {
   width: "90vw",
-  margin: "0 auto"
+  margin: "0 auto",
+  marginTop: "-50%"
 };
 
-const Auction = ({auctionItems, myId}) => {
-
+const Auction = ({ auctionItems, myId }) => {
   return (
     <div>
       <h1>AUCTIONS</h1>
-      <AuctionNav auctionStarted={auctionItems().auctionOn} myId = {myId}/>
-      
+      <AuctionNav auctionStarted={auctionItems().auctionOn} myId={myId} />
+
       <h2>
         {auctionItems().auctionOn
           ? "Live Auction Has Started"
@@ -31,13 +32,15 @@ const Auction = ({auctionItems, myId}) => {
       {auctionItems().items[0] === undefined ? (
         ""
       ) : (
-        <img
-          src={
-            "http://localhost:3001/assets/" +
-            auctionItems().items[0].painting.url
-          }
-          style={centerImage}
-        />
+        <div className="height-crop">
+          <img
+            src={
+              "http://localhost:3001/assets/" +
+              auctionItems().items[0].painting.url
+            }
+            style={centerImage}
+          />
+        </div>
       )}
     </div>
   );

@@ -1,10 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+//semantic-ui components
+import { Divider } from "semantic-ui-react";
 
 const NavLinkItem = props => {
   const link = {
-    color: "maroon"
+    color: "black"
   };
+
 
   return (
     <>

@@ -7,13 +7,12 @@ import "../App.css";
 
 const LandingPage = () => {
   const centerImage = {
-    width: "95vw",
+    width: "93vw",
     margin: "0 auto"
   };
   return (
     <>
       <h1>CAROLINE SEILERN ART</h1>
-      <br />
       <br />
       <img src={drawings} style={centerImage} />
     </>
