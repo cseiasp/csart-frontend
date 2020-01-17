@@ -19,16 +19,38 @@
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+  margin: 0px;
   background-color: white;
 }
-
+/* // look into snap */
 .stickyPainting {
+  scroll-snap-align: end;
   position: -webkit-sticky;
   position: sticky;
+  overflow-y: scroll;
   top: 9rem;
   height: 90vh;
   background-color: white;
   text-align: left;
+}
+
+.stickyPainting::-webkit-scrollbar {
+  display: none;
+}
+
+.stickyPainting:last-child {
+  top: 15rem;
+}
+.vertical-scroll-snap {
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  height: 100vh;
+  padding: 0px;
+  margin-top: -15px;
+  vertical-align: text-top;
+}
+.vertical-scroll-snap::-webkit-scrollbar {
+  display: none;
 }
 
 h1 {
@@ -36,7 +58,8 @@ h1 {
   border-bottom: 1px solid;
   border-color: black;
   text-align: center;
-  padding-top: 10px;
+  /* margin: 0px 0px 0px; */
+  padding: 10px 0px 0px;
   background-color: white;
   /* padding-bottom: px; */
   font-size: 55px;
@@ -44,6 +67,10 @@ h1 {
   position: -webkit-sticky;
   position: sticky;
   top: 2.5rem;
+}
+
+.vertical-scroll-snap > h1 {
+  margin-bottom: 25px;
 }
 
 .border {
@@ -54,11 +81,18 @@ h1 {
   height: 82px;
   background-color: white;
   /* padding-bottom: px; */
-  font-size: 45px;
+  font-size: 25px;
   font-family: "Simplifica";
   position: -webkit-sticky;
   position: sticky;
   top: 2.5rem;
+}
+
+.border::after {
+  content: "";
+  height: 50px;
+  top: 3rem;
+  z-index: -1;
 }
 
 .portraitHeaderP {
@@ -70,17 +104,35 @@ h1 {
 }
 
 .height-crop {
-  height: 25vh;
+  height: 20vh;
   overflow: hidden;
 }
 
-.height-crop img {
-  margin-top: -50%;
+.centered-over-img {
+  position: absolute;
+  color: rgb(42, 54, 54);
+  font-size: 75px;
+  font-weight: bold;
+  font-family: "Simplifica";
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 6px;
 }
 
 .centerImage {
-  width: 95vw;
+  width: 100vw;
   margin: 0 auto;
+}
+
+.paragraph {
+  line-height: 10px;
+  text-indent: 10px;
 }
 
 .centeredText {

@@ -10,13 +10,16 @@ import CountdownTimer from "../components/CountdownTimer";
 const centerImage = {
   width: "90vw",
   margin: "0 auto",
-  marginTop: "-50%"
+  marginTop: "-35%",
+  opacity: "0.5"
 };
 
 const Auction = ({ auctionItems, myId }) => {
   return (
     <div>
       <h1>AUCTIONS</h1>
+      {console.log("test", auctionItems)}
+      {console.log("with ()", auctionItems().items[0])}
       <AuctionNav auctionStarted={auctionItems().auctionOn} myId={myId} />
 
       <h2>
@@ -24,10 +27,7 @@ const Auction = ({ auctionItems, myId }) => {
           ? "Live Auction Has Started"
           : "Next Auction:"}
       </h2>
-      <CountdownTimer
-        item={auctionItems().items[0]}
-        auctionStarted={auctionItems().auctionOn}
-      />
+
       {console.log(auctionItems().items[0])}
       {auctionItems().items[0] === undefined ? (
         ""
@@ -40,6 +40,14 @@ const Auction = ({ auctionItems, myId }) => {
             }
             style={centerImage}
           />
+          <div className="centered-over-img">
+            <CountdownTimer
+              item={auctionItems().items[0]}
+              auctionStarted={auctionItems().auctionOn}
+              fontSize="25px"
+              lineHeight="35px"
+            />
+          </div>
         </div>
       )}
     </div>

@@ -58,7 +58,6 @@ const MyAuction = ({
 
   return (
     <div>
-      {console.log(bidWinners)}
       <h1>My Auction Bids</h1>
       <h2>Pending Bids</h2>
       {currentItem !== undefined

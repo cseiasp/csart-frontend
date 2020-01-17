@@ -7,7 +7,7 @@ import NavLinkItem from "../components/NavLinkItem";
 
 const AuctionNav = ({ myId, auctionStarted }) => {
   return (
-    <div>
+    <div style={{ margin: "15px" }}>
       {auctionStarted && (
         <NavLinkItem linkName="auctions/current" titleName={" current |"} />
       )}

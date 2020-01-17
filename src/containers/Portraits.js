@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 //semantic-ui components
-import { Divider } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 //my components
 import API from "../adapters/API";
 import PaintingCard from "../components/PaintingCard";
@@ -11,7 +11,7 @@ export class Portraits extends Component {
     paintings: [],
     drawings: [],
     drawingsShowing: true,
-    scrollPosition: ""
+    scrollPosition: 5
   };
 
   displayPortraits = () => {
@@ -26,42 +26,39 @@ export class Portraits extends Component {
     }
   };
 
-  portraitsNav = (colour, type) => {
+  portraitsNav = type => {
     return (
-      <>
+      <div className="border">
         <p
           className={type}
-          style={{ color: colour }}
           onClick={() => this.setState({ drawingsShowing: true })}
         >
           DRAWINGS |&nbsp;
         </p>
         <p
           className={type}
-          style={{ color: colour }}
           onClick={() => this.setState({ drawingsShowing: false })}
         >
           PAINTINGS
         </p>
-      </>
+      </div>
     );
   };
 
   displayTitle = () => {
     if (this.state.scrollPosition < 30) {
-      return <h1>PORTRAITS</h1>;
-    } else if (this.state.scrollPosition < 40) {
-      return <h1 style={{ color: "white" }}>PORTRAITS</h1>;
-    } else if (this.state.scrollPosition < 4880) {
       return (
         <div className="border">
-          {this.portraitsNav("black", "portraitHeaderP")}
+          <p
+            className="portraitHeaderP"
+            style={{ fontWeight: "bold", fontSize: "55px" }}
+          >
+            PORTRAITS
+          </p>
         </div>
       );
-    } else {
-      return (
-        <h1 style={{ color: "white", borderColor: "white" }}>PORTRAITS</h1>
-      );
+    } else if (this.state.scrollPosition < 4750) {
+      return this.portraitsNav("portraitHeaderP");
     }
   };
 
@@ -86,12 +83,12 @@ export class Portraits extends Component {
   render() {
     return (
       <div>
-        {this.displayTitle()}
-
-        {this.state.scrollPosition < 30
-          ? this.portraitsNav("black", "portraitSmallP")
-          : this.portraitsNav("white", "portraitSmallP")}
-        {this.displayPortraits()}
+        <div className="vertical-scroll-snap">
+          <h1>PORTRAITS</h1>
+          {this.portraitsNav("portraitHeaderP")}
+          {/* {this.state.scrollPosition < 30 && this.portraitsNav("portraitSmallP")} */}
+          <Grid centered>{this.displayPortraits()}</Grid>
+        </div>
       </div>
     );
   }

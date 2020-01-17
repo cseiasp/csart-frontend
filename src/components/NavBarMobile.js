@@ -23,7 +23,8 @@ const NavBarMobile = props => {
     fontFamily: "Simplifica",
     width: "80vw",
     padding: "5px",
-    textAlign: "center"
+    textAlign: "center",
+    outline: "none"
     // backgroundColor: "rgba(0, 0, 0, .01)"
   };
 

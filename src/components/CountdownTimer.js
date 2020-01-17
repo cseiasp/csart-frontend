@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 //my components
 import API from "../adapters/API";
+import { Grid } from "semantic-ui-react";
 
 const AuctionItem = props => {
   const [difference, setDifference] = useState("");
@@ -28,32 +29,45 @@ const AuctionItem = props => {
       const time = props.auctionStarted ? props.item.end : props.item.start;
       //if auction is ongoing and end time has been hit, set auction bid winner
       if (props.auctionStarted && difference === 0) {
-        API.endOfAuction(39, "successful")
-          .then(bid => props.setBidWin(bid.win.sale))
-          .then(() => API.setAuctionToPast(props.item.id, "past"))
-          .then(console.log)
-          .catch(error => console.log(error));
-        clearInterval(time);
+        props.endOfAuction();
         return;
       } else if (difference === 0) {
-        clearInterval(time);
         return;
       }
       // show time countdown
-      setInterval(() => timeLeft(time), 1000);
+      const handle = setInterval(() => timeLeft(time), 1000);
       return () => {
-        clearInterval(time);
+        clearInterval(handle);
       };
     }
   }, [seconds, props.item]);
 
   return (
-    <div>
-      <p>
-        {props.auctionStarted ? "Ends" : "Starts"} in {days} days, {hours}{" "}
-        hours, {minutes} minutes, {seconds} seconds
-      </p>
-    </div>
+    <>
+      <table className="center" style={{ lineHeight: props.lineHeight }}>
+        <tbody>
+          <tr>
+            <td>{days}</td>
+            <td> : </td>
+            <td>{hours}</td>
+            <td> : </td>
+            <td>{minutes}</td>
+            <td> : </td>
+            <td>{seconds}</td>
+          </tr>
+
+          <tr style={{ fontSize: props.fontSize }}>
+            <td>{days === 1 ? "DAY" : "DAYS"}</td>
+            <td> </td>
+            <td>HOURS</td>
+            <td> </td>
+            <td>MINUTES</td>
+            <td> </td>
+            <td>SECONDS</td>
+          </tr>
+        </tbody>
+      </table>
+    </>
   );
 };
 

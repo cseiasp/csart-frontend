@@ -1,10 +1,11 @@
 import { identifier } from "@babel/types";
+const baseUrl = `http://localhost:3000`;
 
-const paintingURL = "http://localhost:3000/paintings/";
-const salesURL = "http://localhost:3000/sales/";
-const usersURL = "http://localhost:3000/users/";
-const auctionURL = "http://localhost:3000/auctions/";
-const winningsURL = "http://localhost:3000/winnings";
+const paintingURL = `${baseUrl}/paintings/`;
+const salesURL = `${baseUrl}/sales/`;
+const usersURL = `${baseUrl}/users/`;
+const auctionURL = `${baseUrl}/auctions/`;
+const winningsURL = `${baseUrl}/winnings`;
 
 //get requests
 const getPaintings = () => {

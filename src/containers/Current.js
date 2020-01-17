@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 //authentication using Auth0
 import { useAuth0 } from "../react-auth0-spa";
+
 //my components
 import "../App.css";
 import API from "../adapters/API";
 import AllBids from "../components/AllBids";
+import AuctionImg from "../components/AuctionImg";
 import CountdownTimer from "../components/CountdownTimer";
 import BidForm from "../components/BidForm";
 
@@ -17,12 +19,6 @@ const Current = ({
   setBid,
   allBids
 }) => {
-  const centerImage = {
-    width: "90vw",
-    margin: "0 auto",
-    padding: "3px"
-  };
-
   // defining state and auth
   const { loading, user } = useAuth0();
   const [displayBids, setDisplayBids] = useState(false);
@@ -46,21 +42,35 @@ const Current = ({
   };
 
   return (
-    <div>
+    <div className="vertical-scroll-snap">
       <h1>LIVE AUCTION</h1>
-      {!loading && <button onClick={endOfAuction}>Demo: End of Auction</button>}
-      <CountdownTimer
-        item={currentItem}
-        auctionStarted={true}
-        setBidWin={setBidWin}
-      />
-      <img src={"http://localhost:3001/assets/Bunmi.jpg"} style={centerImage} />
-      <button>Bid on this piece</button>
-      {placeBidForm()}
-      <h1>Highest Bid:</h1>
-      <h2> {allBids[0] !== undefined && allBids[0].display_text}</h2>
-      <h1 onClick={() => setDisplayBids(!displayBids)}>All Bids</h1>
-      {displayBids && <AllBids allBids={allBids} />}
+
+      <div className="border">
+        <CountdownTimer
+          item={currentItem}
+          auctionStarted={true}
+          setBidWin={setBidWin}
+          fontSize="20px"
+          padding="5pz"
+          lineHeight="30px"
+          endOfAuction={endOfAuction}
+        />
+      </div>
+
+      <div>
+        <AuctionImg currentItem={currentItem} />
+        )}
+        {placeBidForm()}
+        <h1>Highest Bid:</h1>
+        <h2 className="stickyPainting">
+          {allBids[0] !== undefined && allBids[0].display_text}
+        </h2>
+        <h1 onClick={() => setDisplayBids(!displayBids)}>All Bids</h1>
+        {displayBids && <AllBids allBids={allBids} />}
+        {!loading && (
+          <button onClick={endOfAuction}>Demo: End of Auction</button>
+        )}
+      </div>
     </div>
   );
 };
