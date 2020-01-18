@@ -6,7 +6,7 @@ import { useAuth0 } from "../react-auth0-spa";
 import "../App.css";
 import API from "../adapters/API";
 import AllBids from "../components/AllBids";
-import AuctionImg from "../components/AuctionImg";
+import ImgFlip from "../components/ImgFlip";
 import CountdownTimer from "../components/CountdownTimer";
 import BidForm from "../components/BidForm";
 
@@ -16,13 +16,14 @@ const Current = ({
   currentItem,
   endOfAuction,
   bid,
+  bidPlaced,
   setBid,
-  allBids
+  allBids,
+  setAllBids
 }) => {
   // defining state and auth
   const { loading, user } = useAuth0();
   const [displayBids, setDisplayBids] = useState(false);
-
   const placeBidForm = () => {
     if (loading) {
       return <div>Loading...</div>;
@@ -58,7 +59,16 @@ const Current = ({
       </div>
 
       <div>
-        <AuctionImg currentItem={currentItem} />
+        <ImgFlip
+          currentItem={currentItem}
+          allBids={allBids}
+          placeBidForm = {placeBidForm}
+          displayBids={displayBids}
+          endOfAuction={endOfAuction}
+          setDisplayBids={setDisplayBids}
+          setAllBids={setAllBids}
+          bidPlaced = {bidPlaced}
+        />
         )}
         {placeBidForm()}
         <h1>Highest Bid:</h1>

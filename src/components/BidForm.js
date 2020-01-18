@@ -3,6 +3,7 @@ import React from "react";
 const BidForm = props => {
   return (
     <form
+      className="formClass"
       onSubmit={e =>
         props.placeBidAndSaveUser(
           e,

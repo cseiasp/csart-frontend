@@ -4,7 +4,7 @@ import { Grid, Button } from "semantic-ui-react";
 //my components
 import "../App.css";
 
-const AuctionImg = ({ currentItem }) => {
+const AuctionImg = ({ currentItem, handleClick }) => {
   const centerImage = {
     width: "95vw",
     margin: "0 auto",
@@ -22,7 +22,12 @@ const AuctionImg = ({ currentItem }) => {
             />
           </Grid>
           <Grid centered>
-            <Button basic color="black" style={{ margin: "10px 0px 0px 0px" }}>
+            <Button
+              basic
+              color="black"
+              style={{ margin: "10px 0px 0px 0px" }}
+              onClick={handleClick}
+            >
               Make a Bid
             </Button>
           </Grid>

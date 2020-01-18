@@ -7,6 +7,8 @@ import Modal from "react-modal";
 import { useAuth0 } from "./react-auth0-spa";
 //stripe
 import { StripeProvider } from "react-stripe-elements";
+//action cable
+import ActionCable from "actioncable";
 //semantic-ui components
 import { Container } from "semantic-ui-react";
 //my components
@@ -48,14 +50,17 @@ const App = () => {
   const [myId, setMyId] = useState("");
   //state for current
   const [bid, setBid] = useState("");
+  const [bidPlaced, setBidPlaced] = useState("");
   const [allBids, setAllBids] = useState([]);
-
+  //history
   const history = useHistory();
   //state for App
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [auctionItems, setAuctionItems] = useState([]);
   const [bidWinners, setBidWinners] = useState([]);
   const [myWins, setMyWins] = useState([]);
+  //action Cable
+  // const cable = ActionCable.createConsumer("ws://localhost:3000/cable");
 
   //modal function
   const openOrCloseModal = () => {
@@ -88,10 +93,6 @@ const App = () => {
     setBidWinners(newBidWinners);
   };
 
-  const defineMyWins = myWins => {
-    setMyWins(myWins);
-  };
-
   //functions for current component
   const placeBidAndSaveUser = (
     event,
@@ -102,10 +103,11 @@ const App = () => {
     newsletter
   ) => {
     event.preventDefault();
-    API.saveUser(email, newsletter)
-      .then(user => API.placeBid(painting_id, user.id, bid_price, status))
-      // .then(bid => console.log(bid.new_bid));
-      .then(bid => addBid(bid.new_bid));
+    return API.saveUser(email, newsletter).then(user =>
+      API.placeBid(painting_id, user.id, bid_price, status)
+    )
+    .then(bid => setBidPlaced(bid))
+
   };
 
   const addBid = bid => {
@@ -243,8 +245,10 @@ const App = () => {
                   placeBidAndSaveUser={placeBidAndSaveUser}
                   endOfAuction={endOfAuction}
                   bid={bid}
+                  bidPlaced = {bidPlaced}
                   setBid={setBid}
                   allBids={allBids}
+                  setAllBids={setAllBids}
                 />
               )}
             />
