@@ -23,9 +23,8 @@ const AuctionForm = ({
 }) => {
   const centerImage = {
     width: "95vw",
-
     margin: "0 auto",
-    top: "15rem",
+    marginTop: "-35%",
     opacity: "0.2"
   };
 
@@ -45,41 +44,92 @@ const AuctionForm = ({
   return (
     <div>
       {currentItem !== undefined && (
-        <>
-          <Grid floated="right">
-            <img
-              src={"http://localhost:3001/assets/" + currentItem.painting.url}
-              style={centerImage}
-            />
-          </Grid>
+        <div className="height-crop-current ">
+          <img
+            src={"http://localhost:3001/assets/" + currentItem.painting.url}
+            style={centerImage}
+          />
 
-          <div className="centered-over-img-top">
-            <h2 style={{ fontFamily: "Simplifica" }}>
-              " {currentItem.painting.name} "
-            </h2>
-
-            <p style={{ color: "red" }}>{error !== "" ? error : ""}</p>
-            {placeBidForm()}
-            <h2>
-              Highest Bid:{" "}
-              {allBids[0] !== undefined && "£" + allBids[0].sale.bid_price}
-            </h2>
-            <h2>Last 5 Bids:</h2>
-            <AllBids allBids={allBids} />
-          </div>
-          {!loading && (
-            <Grid centered>
-              <Button
-                basic
-                color="black"
-                onClick={endOfAuction}
-                style={{ margin: "10px" }}
+          <div className="centered-over-img-current">
+            <>
+              <h2
+                style={{
+                  fontFamily: "Simplifica",
+                  textAlign: "center",
+                  margin: "20px"
+                }}
               >
-                Demo: End of Auction
-              </Button>
-            </Grid>
-          )}
-        </>
+                " {currentItem.painting.name} "
+              </h2>
+              <Grid
+                divided
+                centered
+                columns={2}
+                textAlign="right"
+                style={{
+                  width: "95vw",
+                  fontFamily: "Simplifica"
+                }}
+              >
+                <Grid.Row>
+                  <Grid.Column textAlign="right">
+                    <h2>
+                      {allBids[0] !== undefined &&
+                        "£" + allBids[0].sale.bid_price}
+                    </h2>
+                    <p style={{ fontSize: "18px" }}>HIGHEST BID</p>
+                  </Grid.Column>
+                  <Grid.Column textAlign="left">
+                    <h2>
+                      {allBids[0] !== undefined && allBids.length}
+                      <p style={{ fontSize: "18px" }}> TOTAL BIDS</p>
+                    </h2>
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                  <h2></h2>
+                </Grid.Row>
+                <Grid.Row>
+                  <h1></h1>
+                </Grid.Row>
+
+                <Grid.Row>
+                  <Grid.Column
+                    mobile={8}
+                    tablet={4}
+                    computer={1}
+                    textAlign="right"
+                  >
+                    <p style={{ color: "red" }}>{error !== "" ? error : ""}</p>
+                    {placeBidForm()}
+                  </Grid.Column>
+                  <Grid.Column
+                    mobile={8}
+                    tablet={4}
+                    computer={3}
+                    textAlign="left"
+                  >
+                    <h2>Last 5 Bids:</h2>
+                    <AllBids allBids={allBids} />
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+
+              {!loading && (
+                <Grid centered>
+                  <Button
+                    basic
+                    color="black"
+                    onClick={endOfAuction}
+                    style={{ margin: "10px" }}
+                  >
+                    Demo: End of Auction
+                  </Button>
+                </Grid>
+              )}
+            </>
+          </div>
+        </div>
       )}
     </div>
   );

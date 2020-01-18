@@ -8,11 +8,15 @@ const WinningBid = props => {
   };
   return (
     <div>
-      <img
-        src={"http://localhost:3001/assets/" + props.bid.sale.painting.url}
-        style={centerImage}
-      />
-      <p>Bid Placed: {props.bid.display_text}</p>
+      {props.bid !== undefined && (
+        <>
+          <img
+            src={"http://localhost:3001/assets/" + props.bid.sale.painting.url}
+            style={centerImage}
+          />
+          <p>Bid Placed: {props.bid.display_text}</p>
+        </>
+      )}
     </div>
   );
 };

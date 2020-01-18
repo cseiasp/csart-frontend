@@ -60,11 +60,15 @@ grid {
 .formClass {
   width: 25vh;
   font-size: 12px;
-  text-align: center;
+  text-align: right;
+  display: block;
+  /* margin-left: 5vw; */
 }
 
 h2 {
   font-family: "Simplifica";
+  padding: 0px;
+  margin: 0px;
 }
 
 h1 {
@@ -81,6 +85,12 @@ h1 {
   position: -webkit-sticky;
   position: sticky;
   top: 2.5rem;
+}
+
+p {
+  padding: 0px;
+  margin: 0px;
+  font-size: 15px;
 }
 
 .vertical-scroll-snap > h1 {
@@ -120,6 +130,13 @@ h1 {
 .height-crop {
   height: 20vh;
   overflow: hidden;
+  text-align: center;
+}
+
+.height-crop-current {
+  height: 47vh;
+  overflow: hidden;
+  text-align: center;
 }
 .width-crop {
   width: 300px;
@@ -135,7 +152,18 @@ h1 {
   font-size: 75px;
   font-weight: bold;
   font-family: "Simplifica";
-  top: 46%;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.centered-over-img-current {
+  position: absolute;
+  color: rgb(42, 54, 54);
+  text-align: center;
+  font-size: 75px;
+  font-weight: bold;
+  font-family: "Simplifica";
+  top: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

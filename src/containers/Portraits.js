@@ -31,12 +31,14 @@ export class Portraits extends Component {
       <div className="border">
         <p
           className={type}
+          style={{ fontSize: "25px" }}
           onClick={() => this.setState({ drawingsShowing: true })}
         >
           DRAWINGS |&nbsp;
         </p>
         <p
           className={type}
+          style={{ fontSize: "25px" }}
           onClick={() => this.setState({ drawingsShowing: false })}
         >
           PAINTINGS
@@ -87,7 +89,9 @@ export class Portraits extends Component {
           <h1>PORTRAITS</h1>
           {this.portraitsNav("portraitHeaderP")}
           {/* {this.state.scrollPosition < 30 && this.portraitsNav("portraitSmallP")} */}
-          <Grid centered>{this.displayPortraits()}</Grid>
+          <Grid centered mobile={16} tablet={8} computer={4}>
+            {this.displayPortraits()}
+          </Grid>
         </div>
       </div>
     );
