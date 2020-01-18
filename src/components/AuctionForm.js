@@ -18,7 +18,7 @@ const AuctionForm = ({
   endOfAuction,
   setDisplayBids,
   setAllBids,
-  bidPlaced
+  bidPlaced,
 }) => {
   const centerImage = {
     width: "95vw",

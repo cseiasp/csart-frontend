@@ -19,7 +19,7 @@ const Current = ({
   bidPlaced,
   setBid,
   allBids,
-  setAllBids
+  setAllBids, error
 }) => {
   // defining state and auth
   const { loading, user } = useAuth0();
@@ -37,6 +37,7 @@ const Current = ({
           user={user.sub}
           bid={bid}
           setBid={setBid}
+          error = {error}
         />
       );
     }
@@ -68,6 +69,7 @@ const Current = ({
           setDisplayBids={setDisplayBids}
           setAllBids={setAllBids}
           bidPlaced = {bidPlaced}
+
         />
         )}
         {placeBidForm()}

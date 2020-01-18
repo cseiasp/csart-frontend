@@ -27,6 +27,7 @@ import WinningBid from "./components/WinningBid";
 import NavLinkItem from "./components/NavLinkItem";
 
 import API from "./adapters/API";
+import { Z_STREAM_ERROR } from "zlib";
 
 const customStyles = {
   content: {
@@ -52,6 +53,7 @@ const App = () => {
   const [bid, setBid] = useState("");
   const [bidPlaced, setBidPlaced] = useState("");
   const [allBids, setAllBids] = useState([]);
+  const [error, setError] = useState("");
   //history
   const history = useHistory();
   //state for App
@@ -103,11 +105,17 @@ const App = () => {
     newsletter
   ) => {
     event.preventDefault();
-    return API.saveUser(email, newsletter).then(user =>
-      API.placeBid(painting_id, user.id, bid_price, status)
-    )
-    .then(bid => setBidPlaced(bid))
-
+    if (bid <= allBids[0].sale.bid_price) {
+      setError(
+        "Someone has already placed a bid of that amount or higher, please place a higher bid."
+      );
+      return;
+    } else {
+      return API.saveUser(email, newsletter)
+        .then(user => API.placeBid(painting_id, user.id, bid_price, status))
+        .then(bid => setBidPlaced(bid))
+        .then(setError(""));
+    }
   };
 
   const addBid = bid => {
@@ -245,10 +253,11 @@ const App = () => {
                   placeBidAndSaveUser={placeBidAndSaveUser}
                   endOfAuction={endOfAuction}
                   bid={bid}
-                  bidPlaced = {bidPlaced}
+                  bidPlaced={bidPlaced}
                   setBid={setBid}
                   allBids={allBids}
                   setAllBids={setAllBids}
+                  error={error}
                 />
               )}
             />

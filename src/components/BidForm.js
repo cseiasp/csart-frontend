@@ -15,6 +15,7 @@ const BidForm = props => {
         )
       }
     >
+      <p style={{ color: "red" }}>{props.error !== "" && props.error}</p>
       <label>
         Bid:
         <input

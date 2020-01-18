@@ -11,8 +11,7 @@ const ImgFlip = ({
   displayBids,
   endOfAuction,
   setAllBids,
-  bidPlaced,
-  bid
+  bidPlaced
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
