@@ -7,12 +7,13 @@ import NavLinkItem from "../components/NavLinkItem";
 
 const AuctionNav = ({ myId, auctionStarted }) => {
   return (
-    <div style={{ margin: "15px" }}>
+    <div style={{ margin: "15px", fontSize: "25px", fontFamily: "Simplifica" }}>
+      <br />
       {auctionStarted && (
-        <NavLinkItem linkName="auctions/current" titleName={" current |"} />
+        <NavLinkItem linkName="auctions/current" titleName={" live auction "} />
       )}
-      <NavLinkItem linkName="auctions/upcoming" titleName={" upcoming "} />|
-      <NavLinkItem linkName="auctions/past" titleName=" past " />
+      {/* <NavLinkItem linkName="auctions/upcoming" titleName={" upcoming "} />|
+      <NavLinkItem linkName="auctions/past" titleName=" past " /> */}
       {myId !== "" && (
         <NavLinkItem linkName="myauction" titleName="| my auction " />
       )}

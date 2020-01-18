@@ -106,10 +106,10 @@ const App = () => {
   ) => {
     event.preventDefault();
     if (bid <= allBids[0].sale.bid_price) {
-      setError(
-        "Someone has already placed a bid of that amount or higher, please place a higher bid."
-      );
+      setError("Invalid amount");
       return;
+    } else if (isNaN(bid)) {
+      setError("Please enter a number");
     } else {
       return API.saveUser(email, newsletter)
         .then(user => API.placeBid(painting_id, user.id, bid_price, status))
@@ -231,6 +231,7 @@ const App = () => {
                 <Auction
                   {...props}
                   auctionItems={defineAuctionItems}
+                  upcomingItems={selectAuctionItemWithStatus("upcoming")}
                   myId={myId}
                 />
               )}

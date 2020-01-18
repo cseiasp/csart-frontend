@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 //authentication using Auth0
 import { useAuth0 } from "../react-auth0-spa";
+//semantic-ui components
+import { Grid } from "semantic-ui-react";
 
 //my components
 import "../App.css";
@@ -19,7 +21,8 @@ const Current = ({
   bidPlaced,
   setBid,
   allBids,
-  setAllBids, error
+  setAllBids,
+  error
 }) => {
   // defining state and auth
   const { loading, user } = useAuth0();
@@ -37,7 +40,6 @@ const Current = ({
           user={user.sub}
           bid={bid}
           setBid={setBid}
-          error = {error}
         />
       );
     }
@@ -59,30 +61,19 @@ const Current = ({
         />
       </div>
 
-      <div>
+      <Grid centered>
         <ImgFlip
           currentItem={currentItem}
           allBids={allBids}
-          placeBidForm = {placeBidForm}
+          placeBidForm={placeBidForm}
           displayBids={displayBids}
           endOfAuction={endOfAuction}
           setDisplayBids={setDisplayBids}
           setAllBids={setAllBids}
-          bidPlaced = {bidPlaced}
-
+          bidPlaced={bidPlaced}
+          error={error}
         />
-        )}
-        {placeBidForm()}
-        <h1>Highest Bid:</h1>
-        <h2 className="stickyPainting">
-          {allBids[0] !== undefined && allBids[0].display_text}
-        </h2>
-        <h1 onClick={() => setDisplayBids(!displayBids)}>All Bids</h1>
-        {displayBids && <AllBids allBids={allBids} />}
-        {!loading && (
-          <button onClick={endOfAuction}>Demo: End of Auction</button>
-        )}
-      </div>
+      </Grid>
     </div>
   );
 };

@@ -12,28 +12,28 @@ const AuctionImg = ({ currentItem, handleClick }) => {
   };
 
   return (
-    <div className="stickyPainting">
-      {currentItem !== undefined && (
-        <>
-          <Grid centered>
-            <img
-              src={"http://localhost:3001/assets/" + currentItem.painting.url}
-              style={centerImage}
-            />
-          </Grid>
-          <Grid centered>
-            <Button
-              basic
-              color="black"
-              style={{ margin: "10px 0px 0px 0px" }}
-              onClick={handleClick}
-            >
-              Make a Bid
-            </Button>
-          </Grid>
-        </>
-      )}
-    </div>
+      <div className="stickyPainting">
+        {currentItem !== undefined && (
+          <>
+            <Grid centered>
+              <img
+                src={"http://localhost:3001/assets/" + currentItem.painting.url}
+                style={centerImage}
+              />
+            </Grid>
+            <Grid centered>
+              <Button
+                basic
+                color="black"
+                style={{ margin: "10px 0px 0px 0px" }}
+                onClick={handleClick}
+              >
+                Make a Bid
+              </Button>
+            </Grid>
+          </>
+        )}
+      </div>
   );
 };
 

@@ -11,9 +11,10 @@ const ImgFlip = ({
   displayBids,
   endOfAuction,
   setAllBids,
-  bidPlaced
+  bidPlaced,
+  error
 }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(true);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -32,6 +33,7 @@ const ImgFlip = ({
           endOfAuction={endOfAuction}
           setAllBids={setAllBids}
           bidPlaced={bidPlaced}
+          error={error}
         />
       </ReactCardFlip>
     </div>

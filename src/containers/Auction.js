@@ -5,16 +5,9 @@ import { useAuth0 } from "../react-auth0-spa";
 import API from "../adapters/API";
 import "../App.css";
 import AuctionNav from "../components/AuctionNav";
-import CountdownTimer from "../components/CountdownTimer";
+import DisplayTimers from "../components/DisplayTimers";
 
-const centerImage = {
-  width: "90vw",
-  margin: "0 auto",
-  marginTop: "-35%",
-  opacity: "0.5"
-};
-
-const Auction = ({ auctionItems, myId }) => {
+const Auction = ({ auctionItems, myId, upcomingItems }) => {
   return (
     <div>
       <h1>AUCTIONS</h1>
@@ -29,27 +22,8 @@ const Auction = ({ auctionItems, myId }) => {
       </h2>
 
       {console.log(auctionItems().items[0])}
-      {auctionItems().items[0] === undefined ? (
-        ""
-      ) : (
-        <div className="height-crop">
-          <img
-            src={
-              "http://localhost:3001/assets/" +
-              auctionItems().items[0].painting.url
-            }
-            style={centerImage}
-          />
-          <div className="centered-over-img">
-            <CountdownTimer
-              item={auctionItems().items[0]}
-              auctionStarted={auctionItems().auctionOn}
-              fontSize="25px"
-              lineHeight="35px"
-            />
-          </div>
-        </div>
-      )}
+      {auctionItems().items[0] !== undefined &&
+        auctionItems().items.map(item => <DisplayTimers item={item} />)}
     </div>
   );
 };

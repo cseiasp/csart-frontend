@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+// semantic
+import { Form, Button, Input, Label } from "semantic-ui-react";
 //my components
 import API from "../adapters/API";
 
@@ -30,109 +32,98 @@ const SetUp = ({ setAuctionItems, auctionItems }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={event => setNewAuction(event)}>
-        <h1>Painting</h1>
-        <label>
-          Painting ID:
-          <input
-            placeholder="1"
-            type="text"
-            name="painting"
-            onChange={e => setPainting(e.target.value)}
-          />
-        </label>
-        <h1>Start</h1>
-        <label>
-          Day:
-          <input
-            placeholder="15"
-            type="text"
-            name="day"
-            onChange={e => setDay(e.target.value)}
-          />
-        </label>
-        <label>
-          Month:
-          <input
-            placeholder="0"
-            type="text"
-            name="month"
-            onChange={e => setMonth(e.target.value)}
-          />
-        </label>
-        <label>
-          Year:
-          <input
-            placeholder="2020"
-            type="text"
-            name="year"
-            onChange={e => setYear(e.target.value)}
-          />
-        </label>
-        <label>
-          Time:
-          <input
-            placeholder="11"
-            type="text"
-            name="time"
-            onChange={e => setTime(e.target.value)}
-          />
-        </label>
-        <h1>End</h1>
-        <label>
-          Day:
-          <input
-            placeholder="17"
-            type="text"
-            name="endDay"
-            onChange={e => setEndDay(e.target.value)}
-          />
-        </label>
-        <label>
-          Month:
-          <input
-            placeholder="0"
-            type="text"
-            name="endMonth"
-            onChange={e => setEndMonth(e.target.value)}
-          />
-        </label>
-        <label>
-          Year:
-          <input
-            placeholder="2020"
-            type="text"
-            name="endYear"
-            onChange={e => setEndYear(e.target.value)}
-          />
-        </label>
-        <label>
-          Time:
-          <input
-            placeholder="11"
-            type="text"
-            name="endTime"
-            onChange={e => setEndTime(e.target.value)}
-          />
-        </label>
-        <h1>Status</h1>
-        <label>
-          Auction Status:
-          <select onChange={e => setStatus(e.target.value)}>
-            <option defaultValue value="select">
-              Select One
-            </option>
-            <option value="upcoming">Upcoming</option>
-            <option value="past">Past</option>
-            <option value="current">Current</option>
-          </select>
-        </label>
-        <h1>
-          <input type="submit" value="Submit" />
-        </h1>
-      </form>
-    </div>
+    <Form onSubmit={event => setNewAuction(event)}>
+      <h1 style={{ zIndex: "1" }}>Set up auction</h1>
+      <Label>Painting ID:</Label>
+      <Input
+        placeholder="1"
+        type="text"
+        name="painting"
+        onChange={e => setPainting(e.target.value)}
+      />
+
+      <h2>Start</h2>
+      <Label>Day:</Label>
+      <Input
+        placeholder="15"
+        type="text"
+        name="day"
+        onChange={e => setDay(e.target.value)}
+      />
+      <br />
+
+      <Input
+        placeholder="0"
+        type="text"
+        name="month"
+        onChange={e => setMonth(e.target.value)}
+      />
+      <Label>:Month</Label>
+      <br />
+      <Label>Year:</Label>
+      <Input
+        placeholder="2020"
+        type="text"
+        name="year"
+        onChange={e => setYear(e.target.value)}
+      />
+      <br />
+
+      <Input
+        placeholder="11"
+        type="text"
+        name="time"
+        onChange={e => setTime(e.target.value)}
+      />
+      <Label>:Time</Label>
+      <h2>End</h2>
+      <Label>Day:</Label>
+      <Input
+        placeholder="17"
+        type="text"
+        name="endDay"
+        onChange={e => setEndDay(e.target.value)}
+      />
+      <br />
+
+      <Input
+        placeholder="0"
+        type="text"
+        name="endMonth"
+        onChange={e => setEndMonth(e.target.value)}
+      />
+      <Label>:Month</Label>
+      <br />
+      <Label>Year:</Label>
+      <Input
+        placeholder="2020"
+        type="text"
+        name="endYear"
+        onChange={e => setEndYear(e.target.value)}
+      />
+      <br />
+
+      <Input
+        placeholder="11"
+        type="text"
+        name="endTime"
+        onChange={e => setEndTime(e.target.value)}
+      />
+      <Label>:Time</Label>
+      <h2>Status</h2>
+      <Label>Auction Status:</Label>
+      <select onChange={e => setStatus(e.target.value)}>
+        <option defaultValue value="select">
+          Select One
+        </option>
+        <option value="upcoming">Upcoming</option>
+        <option value="past">Past</option>
+        <option value="current">Current</option>
+      </select>
+      <Button basic color="black" type="submit">
+        Submit
+      </Button>
+    </Form>
   );
 };
 

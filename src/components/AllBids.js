@@ -2,9 +2,11 @@ import React from "react";
 
 const AllBids = props => {
   return (
-    <div className="stickyPainting">
-      {props.allBids.map(bid => (
-        <p key={bid.id}>{bid.display_text}</p>
+    <div>
+      {props.allBids.slice(0, 5).map(bid => (
+        <p key={bid.id} style={{ margin: "0px", fontSize: "15px" }}>
+          {bid.display_text}
+        </p>
       ))}
     </div>
   );

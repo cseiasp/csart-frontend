@@ -15,6 +15,10 @@
   opacity: 0;
 }
 
+grid {
+  max-width: 600px;
+}
+
 .sticky {
   position: -webkit-sticky;
   position: sticky;
@@ -38,8 +42,8 @@
   display: none;
 }
 
-.stickyPainting:last-child {
-  top: 15rem;
+.vertical-scroll-snap:last-child {
+  top: 25rem;
 }
 .vertical-scroll-snap {
   overflow-y: scroll;
@@ -54,8 +58,13 @@
 }
 
 .formClass {
-  width: 50vh;
+  width: 25vh;
   font-size: 12px;
+  text-align: center;
+}
+
+h2 {
+  font-family: "Simplifica";
 }
 
 h1 {
@@ -112,6 +121,12 @@ h1 {
   height: 20vh;
   overflow: hidden;
 }
+.width-crop {
+  width: 300px;
+  height: 300px;
+  text-indent: -50vw;
+  overflow: hidden;
+}
 
 .centered-over-img {
   position: absolute;
@@ -120,7 +135,7 @@ h1 {
   font-size: 75px;
   font-weight: bold;
   font-family: "Simplifica";
-  top: 43%;
+  top: 46%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -131,7 +146,7 @@ h1 {
   font-size: 18px;
   font-weight: bold;
   font-family: "Simplifica";
-  top: 30%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

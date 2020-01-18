@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 //authentication using Auth0
 import { useAuth0 } from "../react-auth0-spa";
 //semantic-ui components
@@ -19,9 +19,11 @@ const AuctionForm = ({
   setDisplayBids,
   setAllBids,
   bidPlaced,
+  error
 }) => {
   const centerImage = {
     width: "95vw",
+
     margin: "0 auto",
     top: "15rem",
     opacity: "0.2"
@@ -44,7 +46,7 @@ const AuctionForm = ({
     <div>
       {currentItem !== undefined && (
         <>
-          <Grid centered>
+          <Grid floated="right">
             <img
               src={"http://localhost:3001/assets/" + currentItem.painting.url}
               style={centerImage}
@@ -55,16 +57,28 @@ const AuctionForm = ({
             <h2 style={{ fontFamily: "Simplifica" }}>
               " {currentItem.painting.name} "
             </h2>
-            {placeBidForm()}
-            <h2>Highest Bid:</h2>
 
-            {allBids[0] !== undefined && allBids[0].display_text}
-            <h2 onClick={() => setDisplayBids(!displayBids)}>All Bids</h2>
-            {displayBids && <AllBids allBids={allBids} />}
-            {!loading && (
-              <button onClick={endOfAuction}>Demo: End of Auction</button>
-            )}
+            <p style={{ color: "red" }}>{error !== "" ? error : ""}</p>
+            {placeBidForm()}
+            <h2>
+              Highest Bid:{" "}
+              {allBids[0] !== undefined && "£" + allBids[0].sale.bid_price}
+            </h2>
+            <h2>Last 5 Bids:</h2>
+            <AllBids allBids={allBids} />
           </div>
+          {!loading && (
+            <Grid centered>
+              <Button
+                basic
+                color="black"
+                onClick={endOfAuction}
+                style={{ margin: "10px" }}
+              >
+                Demo: End of Auction
+              </Button>
+            </Grid>
+          )}
         </>
       )}
     </div>

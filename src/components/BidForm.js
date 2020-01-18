@@ -1,8 +1,10 @@
 import React from "react";
+// semantic
+import { Form, Button, Input } from "semantic-ui-react";
 
 const BidForm = props => {
   return (
-    <form
+    <Form
       className="formClass"
       onSubmit={e =>
         props.placeBidAndSaveUser(
@@ -15,17 +17,18 @@ const BidForm = props => {
         )
       }
     >
-      <p style={{ color: "red" }}>{props.error !== "" && props.error}</p>
-      <label>
-        Bid:
-        <input
-          type="text"
-          name="bid"
-          onChange={e => props.setBid(e.target.value)}
-        />
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
+      <Input
+        icon="tags"
+        iconPosition="left"
+        type="text"
+        name="bid"
+        placeholder="Your Bid Amount"
+        onChange={e => props.setBid(e.target.value)}
+      />
+      <Button basic color="black" type="submit" style={{ marginTop: "10px" }}>
+        Submit
+      </Button>
+    </Form>
   );
 };
 
