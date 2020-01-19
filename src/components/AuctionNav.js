@@ -18,12 +18,15 @@ const AuctionNav = ({ myId, auctionStarted }) => {
     >
       <br />
       {auctionStarted && (
-        <NavLinkItem linkName="auctions/current" titleName={" live auction "} />
+        <NavLinkItem
+          linkName="auctions/current"
+          titleName={" live auction |"}
+        />
       )}
       {/* <NavLinkItem linkName="auctions/upcoming" titleName={" upcoming "} />|
       <NavLinkItem linkName="auctions/past" titleName=" past " /> */}
       {myId !== "" && (
-        <NavLinkItem linkName="myauction" titleName="| my auction " />
+        <NavLinkItem linkName="myauction" titleName=" my bids " />
       )}
       {myId === 5 && (
         <NavLinkItem linkName="auctions/setup" titleName="| set up " />

@@ -12,7 +12,6 @@ const MyAuction = ({
   displayWinningBids
 }) => {
   const [displayAllBids, setDisplayAllBids] = useState(false);
-  const { loading, user } = useAuth0();
 
   const displayAllMyBids = () => {
     return (

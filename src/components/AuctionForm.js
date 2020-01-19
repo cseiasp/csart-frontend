@@ -42,7 +42,7 @@ const AuctionForm = ({
   }, [bidPlaced]);
 
   return (
-    <div>
+    <div className="stickyPaintingAuction">
       {currentItem !== undefined && (
         <div className="height-crop-current ">
           <img

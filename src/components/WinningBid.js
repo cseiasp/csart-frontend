@@ -10,6 +10,7 @@ const WinningBid = props => {
     <div>
       {props.bid !== undefined && (
         <>
+          {console.log(props.bid)}
           <img
             src={"http://localhost:3001/assets/" + props.bid.sale.painting.url}
             style={centerImage}

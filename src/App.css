@@ -42,9 +42,32 @@ grid {
   display: none;
 }
 
-.vertical-scroll-snap:last-child {
-  top: 25rem;
+.stickyPainting:last-of-type {
+  background-color: transparent;
+  padding-top: 30px;
 }
+.stickyPainting:last-of-type > img {
+  padding-top: 10px;
+}
+.stickyPainting:last-of-type > p {
+  background-color: white;
+}
+
+.stickyPaintingAuction {
+  scroll-snap-align: top;
+  position: -webkit-sticky;
+  position: sticky;
+  overflow-y: scroll;
+  top: 15;
+  padding-top: 55px;
+  height: 90vh;
+  text-align: left;
+}
+
+.stickyPaintingAuction::-webkit-scrollbar {
+  display: none;
+}
+
 .vertical-scroll-snap {
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
@@ -165,7 +188,7 @@ img {
   font-size: 75px;
   font-weight: bold;
   font-family: "Simplifica";
-  top: 100%;
+  top: 61%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -195,6 +218,7 @@ table.center {
 .paragraph {
   line-height: 10px;
   text-indent: 10px;
+  text-align: center;
 }
 
 .centeredText {

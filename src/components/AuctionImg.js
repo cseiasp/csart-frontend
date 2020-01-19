@@ -6,7 +6,7 @@ import "../App.css";
 
 const AuctionImg = ({ currentItem, handleClick }) => {
   const centerImageMobile = {
-    width: "95vw",
+    height: "75vh",
     margin: "0 auto",
     top: "15rem"
   };
@@ -17,11 +17,11 @@ const AuctionImg = ({ currentItem, handleClick }) => {
   };
 
   return (
-    <div className="stickyPainting">
+    <div className="stickyPaintingAuction">
       {currentItem !== undefined && (
         <>
           <Grid centered>
-            <Grid.Row only="mobile">
+            <Grid.Row only="mobile" style={{ padding: "0px" }}>
               <img
                 src={"http://localhost:3001/assets/" + currentItem.painting.url}
                 style={centerImageMobile}
@@ -42,7 +42,7 @@ const AuctionImg = ({ currentItem, handleClick }) => {
             <Button
               basic
               color="black"
-              style={{ margin: "10px 0px 0px 0px" }}
+              style={{ margin: "2px 0px 0px 0px" }}
               onClick={handleClick}
             >
               Make a Bid

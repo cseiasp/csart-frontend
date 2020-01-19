@@ -32,7 +32,10 @@ const SetUp = ({ setAuctionItems, auctionItems }) => {
   };
 
   return (
-    <Form onSubmit={event => setNewAuction(event)}>
+    <Form
+      onSubmit={event => setNewAuction(event)}
+      style={{ marginTop: "15px" }}
+    >
       <h1 style={{ zIndex: "1" }}>Set up auction</h1>
       <Label>Painting ID:</Label>
       <Input

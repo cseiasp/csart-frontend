@@ -27,11 +27,11 @@ const Current = ({
   // defining state and auth
   const { loading, user } = useAuth0();
   const [displayBids, setDisplayBids] = useState(false);
-  const placeBidForm = (size ) => {
+  const placeBidForm = size => {
     if (loading) {
-      return <div>Loading...</div>;
+      return <p>Loading...</p>;
     } else if (!user) {
-      return <div>Please log in to place a bid</div>;
+      return <p>Please log in to place a bid</p>;
     } else {
       return (
         <BidForm
@@ -40,7 +40,7 @@ const Current = ({
           user={user.sub}
           bid={bid}
           setBid={setBid}
-          size = {size}
+          size={size}
         />
       );
     }
@@ -56,7 +56,7 @@ const Current = ({
           auctionStarted={true}
           setBidWin={setBidWin}
           fontSize="20px"
-          padding="5pz"
+          padding="5px"
           lineHeight="30px"
           endOfAuction={endOfAuction}
         />

@@ -46,7 +46,7 @@ const DisplayTimers = ({ item, auctionStarted }) => {
               <h2 style={{ padding: "30px" }}>
                 {auctionStarted
                   ? "LIVE BIDDING ENDING IN"
-                  : "LIVE BIDDING STARTING IN:"}
+                  : "LIVE BIDDING STARTS IN:"}
               </h2>
               <CountdownTimer
                 item={item}

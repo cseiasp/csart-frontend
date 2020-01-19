@@ -55,13 +55,14 @@ const NavBarMobile = props => {
       <br />
       {/* <Divider /> */}
       <br />
-      {!isAuthenticated && (
-        <>
-          <button onClick={() => loginWithRedirect({})} style={navbarColors}>
-            LOG IN
-          </button>
-        </>
-      )}
+      {!isAuthenticated &&
+        !loading && (
+          <>
+            <button onClick={() => loginWithRedirect({})} style={navbarColors}>
+              LOG IN
+            </button>
+          </>
+        )}
       {/* only show logout when user is logged in */}
       {isAuthenticated && (
         <>

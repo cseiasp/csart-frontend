@@ -59,38 +59,14 @@ export class Portraits extends Component {
     );
   };
 
-  displayTitle = () => {
-    if (this.state.scrollPosition < 30) {
-      return (
-        <div className="border">
-          <p
-            className="portraitHeaderP"
-            style={{ fontWeight: "bold", fontSize: "55px" }}
-          >
-            PORTRAITS
-          </p>
-        </div>
-      );
-    } else if (this.state.scrollPosition < 4750) {
-      return this.portraitsNav("portraitHeaderP");
-    }
-  };
+ 
 
   componentDidMount() {
-    window.addEventListener("scroll", () =>
-      this.setState({ scrollPosition: window.pageYOffset })
-    );
     API.getPaintings().then(portraits =>
       this.setState({
         drawings: portraits.drawings,
         paintings: portraits.paintings
       })
-    );
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", () =>
-      this.setState({ scrollPosition: window.pageYOffset })
     );
   }
 

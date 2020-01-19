@@ -106,7 +106,7 @@ const App = () => {
     newsletter
   ) => {
     event.preventDefault();
-    if (bid <= allBids[0].sale.bid_price) {
+    if (allBids[0] !== undefined && bid <= allBids[0].sale.bid_price) {
       setError("Invalid amount");
       return;
     } else if (isNaN(bid)) {

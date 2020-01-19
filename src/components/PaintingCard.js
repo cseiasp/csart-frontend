@@ -4,11 +4,10 @@ import { Divider } from "semantic-ui-react";
 const PaintingCard = ({ drawing, type, size, computer }) => {
   const centerImage = {
     objectFit: "cover",
-
     width: size,
     height: computer && size,
     margin: "0 auto",
-    padding: computer && "5px"
+    paddingBottom: computer && "5px"
   };
 
   const checkComputer = () => {
@@ -20,7 +19,7 @@ const PaintingCard = ({ drawing, type, size, computer }) => {
   };
 
   return (
-    <div className="stickyPainting" style={{ textAlign: computer && "center" }}>
+    <div className="stickyPainting" >
       <img
         key={drawing.id}
         src={

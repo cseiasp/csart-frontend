@@ -21,22 +21,20 @@ const ImgFlip = ({
   };
 
   return (
-    <div className="stickyPainting">
-      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-        <AuctionImg handleClick={handleClick} currentItem={currentItem} />
-        <AuctionForm
-          handleClick={handleClick}
-          currentItem={currentItem}
-          placeBidForm={placeBidForm}
-          allBids={allBids}
-          displayBids={displayBids}
-          endOfAuction={endOfAuction}
-          setAllBids={setAllBids}
-          bidPlaced={bidPlaced}
-          error={error}
-        />
-      </ReactCardFlip>
-    </div>
+    <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+      <AuctionImg handleClick={handleClick} currentItem={currentItem} />
+      <AuctionForm
+        handleClick={handleClick}
+        currentItem={currentItem}
+        placeBidForm={placeBidForm}
+        allBids={allBids}
+        displayBids={displayBids}
+        endOfAuction={endOfAuction}
+        setAllBids={setAllBids}
+        bidPlaced={bidPlaced}
+        error={error}
+      />
+    </ReactCardFlip>
   );
 };
 
