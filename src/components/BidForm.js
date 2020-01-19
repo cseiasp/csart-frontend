@@ -6,6 +6,7 @@ const BidForm = props => {
   return (
     <Form
       className="formClass"
+      style={{ marginLeft: props.size }}
       onSubmit={e =>
         props.placeBidAndSaveUser(
           e,

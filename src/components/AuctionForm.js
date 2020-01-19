@@ -94,21 +94,15 @@ const AuctionForm = ({
                 </Grid.Row>
 
                 <Grid.Row>
-                  <Grid.Column
-                    mobile={8}
-                    tablet={4}
-                    computer={1}
-                    textAlign="right"
-                  >
+                  <Grid.Column only="tablet computer" textAlign="right">
+                    <p style={{ color: "red" }}>{error !== "" ? error : ""}</p>
+                    {placeBidForm("31vw")}
+                  </Grid.Column>
+                  <Grid.Column only="mobile" textAlign="right">
                     <p style={{ color: "red" }}>{error !== "" ? error : ""}</p>
                     {placeBidForm()}
                   </Grid.Column>
-                  <Grid.Column
-                    mobile={8}
-                    tablet={4}
-                    computer={3}
-                    textAlign="left"
-                  >
+                  <Grid.Column textAlign="left">
                     <h2>Last 5 Bids:</h2>
                     <AllBids allBids={allBids} />
                   </Grid.Column>

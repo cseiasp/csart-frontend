@@ -27,7 +27,7 @@ const Current = ({
   // defining state and auth
   const { loading, user } = useAuth0();
   const [displayBids, setDisplayBids] = useState(false);
-  const placeBidForm = () => {
+  const placeBidForm = (size ) => {
     if (loading) {
       return <div>Loading...</div>;
     } else if (!user) {
@@ -40,6 +40,7 @@ const Current = ({
           user={user.sub}
           bid={bid}
           setBid={setBid}
+          size = {size}
         />
       );
     }

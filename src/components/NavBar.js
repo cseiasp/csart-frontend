@@ -1,23 +1,65 @@
 import React from "react";
 import { useAuth0 } from "../react-auth0-spa";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+//semantic-ui components
+import { Divider } from "semantic-ui-react";
+//my components
+import NavLinkItem from "./NavLinkItem";
 
-const NavBar = () => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+const NavBar = props => {
+  const {
+    isAuthenticated,
+    loginWithRedirect,
+    logout,
+    loading,
+    user
+  } = useAuth0();
+
+  const navbarColors = {
+    backgroundColor: "white",
+    color: "black",
+    border: "none",
+    fontSize: "25px",
+    fontFamily: "Simplifica",
+    textAlign: "center",
+    outline: "none",
+    zIndex: "10"
+  };
 
   return (
-    <div>
+    <div style={navbarColors}>
+      <NavLinkItem linkName="about" titleName=" about " close={props.close} />
+      <NavLinkItem
+        linkName="portraits"
+        titleName="|   portraits   "
+        close={props.close}
+      />
+      <NavLinkItem
+        linkName="auctions"
+        titleName="|   auctions   "
+        close={props.close}
+      />
       {!isAuthenticated && (
-        <button onClick={() => loginWithRedirect({})}>Log in</button>
+        <>
+          <button onClick={() => loginWithRedirect({})} style={navbarColors}>
+            | LOG IN
+          </button>
+        </>
       )}
-
-      {isAuthenticated && <button onClick={() => logout()}>Log out</button>}
-      {/* NEW - add a link to the home and profile pages */}
+      {/* only show logout when user is logged in */}
       {isAuthenticated && (
-        <span>
-          <Link to="/">Home</Link>&nbsp;
-          <Link to="/profile">Profile</Link>
-        </span>
+        <>
+          <NavLinkItem
+            linkName="myauction"
+            titleName="|   my auction  "
+            close={props.close}
+          />
+        </>
+      )}
+      {isAuthenticated && (
+        <button onClick={() => logout()} style={navbarColors}>
+          | LOG OUT
+        </button>
       )}
     </div>
   );

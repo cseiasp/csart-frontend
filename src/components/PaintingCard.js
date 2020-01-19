@@ -1,24 +1,51 @@
 import React from "react";
 import { Divider } from "semantic-ui-react";
 
-const PaintingCard = ({ drawing, type }) => {
+const PaintingCard = ({ drawing, type, size, computer }) => {
   const centerImage = {
-    width: "90vw",
+    objectFit: "cover",
+
+    width: size,
+    height: computer && size,
     margin: "0 auto",
-    padding: "3px"
+    padding: computer && "5px"
+  };
+
+  const checkComputer = () => {
+    if (computer) {
+      return "Computer/";
+    } else {
+      return "";
+    }
   };
 
   return (
-    <div className="stickyPainting">
+    <div className="stickyPainting" style={{ textAlign: computer && "center" }}>
       <img
         key={drawing.id}
-        src={"http://localhost:3001/assets/" + type + "/" + drawing.url}
+        src={
+          "http://localhost:3001/assets/" +
+          checkComputer() +
+          type +
+          "/" +
+          drawing.url
+        }
         style={centerImage}
       />
-      <p className="paragraph">{drawing.name + ", " + drawing.medium}</p>
-      <p className="paragraph">
-        {drawing.exhibited_at && drawing.exhibited_at}
-      </p>
+      {console.log(
+        "http://localhost:3001/assets/" +
+          checkComputer() +
+          type +
+          "/" +
+          drawing.url
+      )}
+
+      <>
+        <p className="paragraph">{drawing.name + ", " + drawing.medium}</p>
+        <p className="paragraph">
+          {drawing.exhibited_at && drawing.exhibited_at}
+        </p>
+      </>
     </div>
   );
 };

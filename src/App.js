@@ -10,10 +10,11 @@ import { StripeProvider } from "react-stripe-elements";
 //action cable
 import ActionCable from "actioncable";
 //semantic-ui components
-import { Container } from "semantic-ui-react";
+import { Container, Grid } from "semantic-ui-react";
 //my components
 import "./App.css";
 import NavBarMobile from "./components/NavBarMobile";
+import NavBar from "./components/NavBar";
 import LandingPage from "./components/LandingPage";
 import Portraits from "./containers/Portraits";
 import Auction from "./containers/Auction";
@@ -193,14 +194,31 @@ const App = () => {
       <div className="centeredText">
         <Container>
           {/* show navbar modal */}
-          <h3
-            className="sticky"
-            onClick={openOrCloseModal}
-            // style={{ fontFamily: "Simplifica" }}
-          >
-            MENU
-          </h3>
-
+          <Grid centered>
+            <Grid.Row only="tablet mobile">
+              <h3
+                className="sticky"
+                onClick={openOrCloseModal}
+                // style={{ fontFamily: "Simplifica" }}
+              >
+                MENU
+              </h3>
+            </Grid.Row>
+          </Grid>
+          <div className="sticky">
+            <Grid verticalAlign="middle" style={{ width: "100vw" }}>
+              <Grid.Row only="computer" style={{ padding: "0px" }}>
+                <Grid.Column textAlign="left" width={4}>
+                  <h3 style={{ fontFamily: "Simplifica", fontSize: "35px" }}>
+                    CAROLINE SEILERN ART
+                  </h3>
+                </Grid.Column>
+                <Grid.Column textAlign="right" width={12}>
+                  <NavBar />
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </div>
           <Modal
             isOpen={modalIsOpen}
             onRequestClose={openOrCloseModal}

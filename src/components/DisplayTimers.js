@@ -1,13 +1,22 @@
 import React from "react";
 //my components
 import CountdownTimer from "../components/CountdownTimer";
+import { Grid } from "semantic-ui-react";
 
-const DisplayTimers = ({ item }) => {
+const DisplayTimers = ({ item, auctionStarted }) => {
+  const centerImageMobile = {
+    width: "90vw",
+    margin: "0 auto",
+    marginTop: "-15%",
+    opacity: "0.5",
+    paddingTop: "40px"
+  };
   const centerImage = {
     width: "90vw",
     margin: "0 auto",
     marginTop: "-35%",
-    opacity: "0.5"
+    opacity: "0.5",
+    padding: "20px"
   };
 
   return (
@@ -17,14 +26,31 @@ const DisplayTimers = ({ item }) => {
 
         {item !== null && (
           <>
-            <img
-              src={"http://localhost:3001/assets/" + item.painting.url}
-              style={centerImage}
-            />
+            <Grid>
+              <Grid.Row only="tablet mobile">
+                <img
+                  src={"http://localhost:3001/assets/" + item.painting.url}
+                  style={centerImageMobile}
+                />
+              </Grid.Row>
+            </Grid>
+            <Grid>
+              <Grid.Row only="computer">
+                <img
+                  src={"http://localhost:3001/assets/" + item.painting.url}
+                  style={centerImage}
+                />
+              </Grid.Row>
+            </Grid>
             <div className="centered-over-img">
+              <h2 style={{ padding: "30px" }}>
+                {auctionStarted
+                  ? "LIVE BIDDING ENDING IN"
+                  : "LIVE BIDDING STARTING IN:"}
+              </h2>
               <CountdownTimer
                 item={item}
-                auctionStarted={true}
+                auctionStarted={auctionStarted}
                 fontSize="25px"
                 lineHeight="35px"
               />

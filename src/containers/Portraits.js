@@ -10,25 +10,37 @@ export class Portraits extends Component {
   state = {
     paintings: [],
     drawings: [],
-    drawingsShowing: true,
+    drawingsShowing: false,
     scrollPosition: 5
   };
 
-  displayPortraits = () => {
+  displayPortraits = (size, computer) => {
     if (this.state.drawingsShowing) {
       return this.state.drawings.map(drawing => (
-        <PaintingCard drawing={drawing} key={drawing.id} type="Drawings" />
+        <PaintingCard
+          drawing={drawing}
+          key={drawing.id}
+          type="Drawings"
+          size={size}
+          computer={computer}
+        />
       ));
     } else {
       return this.state.paintings.map(drawing => (
-        <PaintingCard drawing={drawing} key={drawing.id} type="paintings" />
+        <PaintingCard
+          drawing={drawing}
+          key={drawing.id}
+          type="paintings"
+          size={size}
+          computer={computer}
+        />
       ));
     }
   };
 
   portraitsNav = type => {
     return (
-      <div className="border">
+      <div className="border" style={{ zIndex: "9" }}>
         <p
           className={type}
           style={{ fontSize: "25px" }}
@@ -89,8 +101,20 @@ export class Portraits extends Component {
           <h1>PORTRAITS</h1>
           {this.portraitsNav("portraitHeaderP")}
           {/* {this.state.scrollPosition < 30 && this.portraitsNav("portraitSmallP")} */}
-          <Grid centered mobile={16} tablet={8} computer={4}>
-            {this.displayPortraits()}
+          <Grid centered>
+            <Grid.Row only="mobile">
+              {this.displayPortraits("90vw", false)}
+            </Grid.Row>
+          </Grid>
+          <Grid centered>
+            <Grid.Row only="tablet">
+              {this.displayPortraits("75vw", false)}
+            </Grid.Row>
+          </Grid>
+          <Grid centered column={1}>
+            <Grid.Row only="computer">
+              <Grid.Column>{this.displayPortraits("480px", true)}</Grid.Column>
+            </Grid.Row>
           </Grid>
         </div>
       </div>

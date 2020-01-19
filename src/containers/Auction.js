@@ -15,15 +15,14 @@ const Auction = ({ auctionItems, myId, upcomingItems }) => {
       {console.log("with ()", auctionItems().items[0])}
       <AuctionNav auctionStarted={auctionItems().auctionOn} myId={myId} />
 
-      <h2>
-        {auctionItems().auctionOn
-          ? "Live Auction Has Started"
-          : "Next Auction:"}
-      </h2>
-
       {console.log(auctionItems().items[0])}
       {auctionItems().items[0] !== undefined &&
-        auctionItems().items.map(item => <DisplayTimers item={item} />)}
+        auctionItems().items.map(item => (
+          <DisplayTimers
+            item={item}
+            auctionStarted={auctionItems().auctionOn}
+          />
+        ))}
     </div>
   );
 };

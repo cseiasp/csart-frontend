@@ -14,7 +14,7 @@ const ImgFlip = ({
   bidPlaced,
   error
 }) => {
-  const [isFlipped, setIsFlipped] = useState(true);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
