@@ -26,6 +26,29 @@ const Purchase = ({ winningBids, bidWinners }) => {
     setModalIsOpen(!modalIsOpen);
   };
 
+  const checkoutButton = () => {
+    if (paymentOk) {
+      return (
+        <Button icon style={{ marginTop: "10px" }}>
+          <Icon name="shopping cart" style={{ paddingRight: "5px" }} />
+          Checkout Complete
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+          icon
+          basic
+          color="black"
+          onClick={openOrCloseModal}
+          style={{ marginTop: "10px" }}
+        >
+          <Icon name="shopping cart" style={{ paddingRight: "5px" }} />
+          Proceed to Checkout
+        </Button>
+      );
+    }
+  };
   const getMyId = () => {
     if (loading || !user) {
       return <div>Loading...</div>;
@@ -49,56 +72,36 @@ const Purchase = ({ winningBids, bidWinners }) => {
     }
   };
 
-  useEffect(() => {
-    getMyId();
-  }, [loading]);
-
-  const paymentComplete = () => {
-    return <div>Your payment was succesfully complete</div>;
-  };
-
-  const paymentDue = () => {
+  const displayBasket = () => {
     return (
-      <div>
-        <h1>BASKET</h1>
-        {bidWinners.length > 0 && (
-          <>
-            <Grid stackable>
-              <Grid.Row>
-                <Grid.Column>
-                  {winningBids()}
-                  <div className="border-div">
-                    <h2>Order Summary</h2>
+      <>
+        <Grid stackable>
+          <Grid.Row>
+            <Grid.Column>
+              {winningBids()}
+              <div className="border-div">
+                <h2>Order Summary</h2>
 
-                    <Grid divider>
-                      <Grid.Column width={8} textAlign="left">
-                        <p style={{ fontSize: "18px" }}>
-                          Name of Artwork: {bidWinners[0].sale.painting.name}
-                        </p>
-                      </Grid.Column>
-                      <Grid.Column width={8} textAlign="right">
-                        <p style={{ fontSize: "18px" }}>
-                          Total: £{bidWinners[0].sale.bid_price}
-                        </p>
-                      </Grid.Column>
-                    </Grid>
-                  </div>
-                  <Button
-                    icon
-                    basic
-                    color="black"
-                    onClick={openOrCloseModal}
-                    style={{ marginTop: "10px" }}
-                  >
-                    <Icon
-                      name="shopping cart"
-                      style={{ paddingRight: "5px" }}
-                    />
-                    Proceed to Checkout
-                  </Button>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
+                <Grid divider>
+                  <Grid.Column width={8} textAlign="left">
+                    <p style={{ fontSize: "18px" }}>
+                      Name of Artwork: {bidWinners[0].sale.painting.name}
+                    </p>
+                  </Grid.Column>
+                  <Grid.Column width={8} textAlign="right">
+                    <p style={{ fontSize: "18px" }}>
+                      Total: £{bidWinners[0].sale.bid_price}
+                    </p>
+                  </Grid.Column>
+                </Grid>
+              </div>
+
+              {checkoutButton()}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        <Grid>
+          <Grid.Row only="tablet mobile">
             <Modal
               isOpen={modalIsOpen}
               onRequestClose={openOrCloseModal}
@@ -107,17 +110,43 @@ const Purchase = ({ winningBids, bidWinners }) => {
               <Elements style={{ padding: "30px" }}>
                 <Payment
                   setPaymentOk={setPaymentOk}
+                  paymentOk={paymentOk}
                   amount={bidWinners[0].sale.bid_price}
+                  close={openOrCloseModal}
+                  saleId={bidWinners.length > 0 ? bidWinners[0].sale.id : ""}
                 />
               </Elements>
             </Modal>
-          </>
-        )}
+          </Grid.Row>
+        </Grid>
+      </>
+    );
+  };
+
+  const emptyBasket = () => {
+    return (
+      <div
+        style={{
+          paddingTop: "50%",
+          fontFamily: "Simplifica"
+        }}
+      >
+        <Icon color="grey" name="shopping cart" size="massive" />
+        <p style={{ fontSize: "25px" }}> You have no items in your basket</p>
       </div>
     );
   };
 
-  return <>{paymentOk ? paymentComplete() : paymentDue()}</>;
+  useEffect(() => {
+    getMyId();
+  }, [loading]);
+
+  return (
+    <div>
+      <h1>BASKET</h1>
+      {bidWinners.length > 0 ? displayBasket() : emptyBasket()}
+    </div>
+  );
 };
 
 export default Purchase;
