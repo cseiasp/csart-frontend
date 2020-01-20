@@ -239,6 +239,18 @@ table.center {
   height: 100vh;
 }
 
+.checkout {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.StripeElement {
+  border: 1px solid lightslategrey;
+  border-radius: 5px;
+  padding: 10px 14px;
+  background: white;
+}
+
 .MyCardElement {
   height: 40px;
   padding: 10px 12px;
