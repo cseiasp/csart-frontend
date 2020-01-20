@@ -4,7 +4,7 @@ import { useAuth0 } from "../react-auth0-spa";
 //stripe
 import { CardElement, injectStripe } from "react-stripe-elements";
 //semantic-ui components
-import { Label, Button, Icon } from "semantic-ui-react";
+import { Label, Button, Icon, Grid } from "semantic-ui-react";
 //my components
 import "../App.css";
 import API from "../adapters/API";

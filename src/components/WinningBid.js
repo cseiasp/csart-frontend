@@ -5,7 +5,7 @@ const WinningBid = props => {
   const centerImage = {
     width: props.size,
     marginTop: "10px",
-    paddingTop: "25px",
+    paddingTop: "30px",
     margin: "0 auto"
   };
   return (

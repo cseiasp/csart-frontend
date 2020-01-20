@@ -87,44 +87,45 @@ const Purchase = ({ winningBids, bidWinners }) => {
 
   const displayBasket = () => {
     return (
-      <>
-        <Grid centered stackable>
-          <Grid.Row>
-            <Grid>
-              <Grid.Row only="computer"> {winningBids("30vw")}</Grid.Row>
-            </Grid>
-            <Grid>
-              <Grid.Row only="tablet mobile">{winningBids("65vw")}</Grid.Row>
-            </Grid>
-            <Grid>
-              <Grid.Column>
-                <div className="border-div">
-                  <h2>Order Summary</h2>
-
-                  <Grid divider>
-                    <Grid.Column width={8} textAlign="left">
-                      <p style={{ fontSize: "18px" }}>
-                        Name of Artwork: {bidWinners[0].sale.painting.name}
-                      </p>
-                    </Grid.Column>
-                    <Grid.Column width={8} textAlign="right">
-                      <p style={{ fontSize: "18px" }}>
-                        Total: £{bidWinners[0].sale.bid_price}
-                      </p>
-                    </Grid.Column>
-                  </Grid>
-                </div>
-                <Grid centered>{checkoutButton()}</Grid>
-              </Grid.Column>
-            </Grid>
+      <div style={{ padding: "0px" }}>
+        <Grid centered>
+          <Grid.Row only="computer" style={{ paddingBottom: "0px" }}>
+            {" "}
+            {winningBids("25vw")}
+          </Grid.Row>
+        </Grid>
+        <Grid centered>
+          <Grid.Row only="tablet mobile" style={{ paddingBottom: "0px" }}>
+            {winningBids("75vw")}
           </Grid.Row>
         </Grid>
         <Grid>
-          <Grid.Row only="computer">
+          <Grid.Column style={{ paddingTop: "0px" }}>
+            <div className="border-div">
+              <h2>Order Summary</h2>
+              <Grid divider>
+                <Grid.Column width={8} textAlign="left">
+                  <p style={{ fontSize: "18px" }}>
+                    Name of Artwork: {bidWinners[0].sale.painting.name}
+                  </p>
+                </Grid.Column>
+                <Grid.Column width={8} textAlign="right">
+                  <p style={{ fontSize: "18px" }}>
+                    Total: £{bidWinners[0].sale.bid_price}
+                  </p>
+                </Grid.Column>
+              </Grid>
+            </div>
+            <Grid centered>{checkoutButton()}</Grid>
+          </Grid.Column>
+        </Grid>
+
+        <Grid>
+          <Grid.Row only="mobile">
             <Modal
               isOpen={modalIsOpen}
               onRequestClose={openOrCloseModal}
-              style={customStylesComp}
+              style={customStyles}
             >
               <Elements style={{ padding: "30px" }}>
                 <Payment
@@ -138,7 +139,7 @@ const Purchase = ({ winningBids, bidWinners }) => {
             </Modal>
           </Grid.Row>
         </Grid>
-      </>
+      </div>
     );
   };
 
