@@ -52,6 +52,7 @@ const App = () => {
   //state for current
   const [bid, setBid] = useState("");
   const [bidPlaced, setBidPlaced] = useState("");
+  const [allFetchedBids, setAllFetchedBids] = useState([]);
   const [allBids, setAllBids] = useState([]);
   const [error, setError] = useState("");
   //history
@@ -105,7 +106,13 @@ const App = () => {
     newsletter
   ) => {
     event.preventDefault();
-    if (allBids[0] !== undefined && bid <= allBids[0].sale.bid_price) {
+    const currentPaintingBids = allBids.filter(
+      bid => bid.sale.painting_id === painting_id
+    );
+    if (
+      currentPaintingBids[0] !== undefined &&
+      bid <= currentPaintingBids[0].sale.bid_price
+    ) {
       setError("Invalid amount");
       return;
     } else if (isNaN(bid)) {
@@ -173,11 +180,11 @@ const App = () => {
     }
   };
 
-  const winningBids = () => {
+  const winningBids = ( size) => {
     console.log("winning bids", bidWinners);
     const myWin = bidWinners.filter(win => win.sale.user_id === myId)[0];
     return (
-      <>{myWin !== undefined && <WinningBid key={myWin.id} bid={myWin} />}</>
+      <>{myWin !== undefined && <WinningBid key={myWin.id} bid={myWin} size = {size}/>}</>
     );
   };
 

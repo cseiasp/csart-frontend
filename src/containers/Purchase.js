@@ -29,7 +29,7 @@ const Purchase = ({ winningBids, bidWinners }) => {
   const checkoutButton = () => {
     if (paymentOk) {
       return (
-        <Button icon style={{ marginTop: "10px" }}>
+        <Button icon style={{ marginTop: "25px" }}>
           <Icon name="shopping cart" style={{ paddingRight: "5px" }} />
           Checkout Complete
         </Button>
@@ -41,7 +41,7 @@ const Purchase = ({ winningBids, bidWinners }) => {
           basic
           color="black"
           onClick={openOrCloseModal}
-          style={{ marginTop: "10px" }}
+          style={{ marginTop: "25px" }}
         >
           <Icon name="shopping cart" style={{ paddingRight: "5px" }} />
           Proceed to Checkout
@@ -72,40 +72,59 @@ const Purchase = ({ winningBids, bidWinners }) => {
     }
   };
 
+  const customStylesComp = {
+    content: {
+      width: "50vw",
+      // height: "75vh",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)"
+    }
+  };
+
   const displayBasket = () => {
     return (
       <>
-        <Grid stackable>
+        <Grid centered stackable>
           <Grid.Row>
-            <Grid.Column>
-              {winningBids()}
-              <div className="border-div">
-                <h2>Order Summary</h2>
+            <Grid>
+              <Grid.Row only="computer"> {winningBids("30vw")}</Grid.Row>
+            </Grid>
+            <Grid>
+              <Grid.Row only="tablet mobile">{winningBids("65vw")}</Grid.Row>
+            </Grid>
+            <Grid>
+              <Grid.Column>
+                <div className="border-div">
+                  <h2>Order Summary</h2>
 
-                <Grid divider>
-                  <Grid.Column width={8} textAlign="left">
-                    <p style={{ fontSize: "18px" }}>
-                      Name of Artwork: {bidWinners[0].sale.painting.name}
-                    </p>
-                  </Grid.Column>
-                  <Grid.Column width={8} textAlign="right">
-                    <p style={{ fontSize: "18px" }}>
-                      Total: £{bidWinners[0].sale.bid_price}
-                    </p>
-                  </Grid.Column>
-                </Grid>
-              </div>
-
-              {checkoutButton()}
-            </Grid.Column>
+                  <Grid divider>
+                    <Grid.Column width={8} textAlign="left">
+                      <p style={{ fontSize: "18px" }}>
+                        Name of Artwork: {bidWinners[0].sale.painting.name}
+                      </p>
+                    </Grid.Column>
+                    <Grid.Column width={8} textAlign="right">
+                      <p style={{ fontSize: "18px" }}>
+                        Total: £{bidWinners[0].sale.bid_price}
+                      </p>
+                    </Grid.Column>
+                  </Grid>
+                </div>
+                <Grid centered>{checkoutButton()}</Grid>
+              </Grid.Column>
+            </Grid>
           </Grid.Row>
         </Grid>
         <Grid>
-          <Grid.Row only="tablet mobile">
+          <Grid.Row only="computer">
             <Modal
               isOpen={modalIsOpen}
               onRequestClose={openOrCloseModal}
-              style={customStyles}
+              style={customStylesComp}
             >
               <Elements style={{ padding: "30px" }}>
                 <Payment

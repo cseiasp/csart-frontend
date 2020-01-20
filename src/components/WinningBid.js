@@ -3,7 +3,7 @@ import React from "react";
 
 const WinningBid = props => {
   const centerImage = {
-    width: "65vw",
+    width: props.size,
     marginTop: "10px",
     paddingTop: "25px",
     margin: "0 auto"
@@ -11,7 +11,7 @@ const WinningBid = props => {
   return (
     <>
       {props.bid !== undefined && (
-        <>
+        <div>
           {console.log("winning bids", props.bid)}
           <img
             src={"http://localhost:3001/assets/" + props.bid.sale.painting.url}
@@ -20,7 +20,7 @@ const WinningBid = props => {
           <p style={{ paddingBottom: "14px", fontFamily: "Simplifica" }}>
             Bid Placed: {props.bid.display_text}
           </p>
-        </>
+        </div>
       )}
     </>
   );

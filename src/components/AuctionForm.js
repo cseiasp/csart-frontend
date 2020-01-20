@@ -28,6 +28,12 @@ const AuctionForm = ({
     opacity: "0.2"
   };
 
+  const selectPaintingBids = () => {
+    return allBids.filter(
+      bid => bid.sale.painting_id === currentItem.painting_id
+    );
+  };
+
   const { loading, user } = useAuth0();
 
   useEffect(() => {
@@ -74,14 +80,17 @@ const AuctionForm = ({
                 <Grid.Row>
                   <Grid.Column textAlign="right">
                     <h2>
-                      {allBids[0] !== undefined &&
-                        "£" + allBids[0].sale.bid_price}
+                      {selectPaintingBids()[0] !== undefined
+                        ? "£" + selectPaintingBids()[0].sale.bid_price
+                        : "£0"}
                     </h2>
                     <p style={{ fontSize: "18px" }}>HIGHEST BID</p>
                   </Grid.Column>
                   <Grid.Column textAlign="left">
                     <h2>
-                      {allBids[0] !== undefined && allBids.length}
+                      {selectPaintingBids()[0] !== undefined
+                        ? selectPaintingBids().length
+                        : "0"}
                       <p style={{ fontSize: "18px" }}> TOTAL BIDS</p>
                     </h2>
                   </Grid.Column>
@@ -104,7 +113,11 @@ const AuctionForm = ({
                   </Grid.Column>
                   <Grid.Column textAlign="left">
                     <h2>Last 5 Bids:</h2>
-                    <AllBids allBids={allBids} />
+                    {selectPaintingBids()[0] !== undefined ? (
+                      <AllBids allBids={selectPaintingBids()} />
+                    ) : (
+                      <p>No bids have been place, be the first to bid!</p>
+                    )}
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
