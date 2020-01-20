@@ -59,8 +59,6 @@ export class Portraits extends Component {
     );
   };
 
- 
-
   componentDidMount() {
     API.getPaintings().then(portraits =>
       this.setState({
@@ -89,8 +87,15 @@ export class Portraits extends Component {
           </Grid>
           <Grid centered column={1}>
             <Grid.Row only="computer">
-              <Grid.Column>{this.displayPortraits("480px", true)}</Grid.Column>
+              <Grid.Column style={{ width: "480px" }}>
+                {this.displayPortraits("480px", true)}
+              </Grid.Column>
             </Grid.Row>
+            {/* <Grid.Row only="computer">
+              <Grid.Column style={{ width: "480px" }}>
+                {this.displayPortraits("480px", true)}
+              </Grid.Column>
+            </Grid.Row> */}
           </Grid>
         </div>
       </div>

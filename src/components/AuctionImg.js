@@ -6,14 +6,13 @@ import "../App.css";
 
 const AuctionImg = ({ currentItem, handleClick }) => {
   const centerImageMobile = {
-    height: "75vh",
+    height: "70vh",
     margin: "0 auto",
     top: "15rem"
   };
   const centerImage = {
-    width: "30vw",
-    margin: "0 auto",
-    top: "15rem"
+    height: "70vh",
+    margin: "0 auto"
   };
 
   return (

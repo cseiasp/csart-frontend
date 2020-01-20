@@ -11,6 +11,7 @@
   background-image: url("http://localhost:3001/assets/Bunmi.jpg");
 }
 
+
 .transparentClass {
   opacity: 0;
 }
@@ -44,7 +45,7 @@ grid {
 
 .stickyPainting:last-of-type {
   background-color: transparent;
-  padding-top: 30px;
+  /* padding-top: 30px; */
 }
 .stickyPainting:last-of-type > img {
   padding-top: 10px;
@@ -137,6 +138,17 @@ img {
   top: 2.5rem;
 }
 
+.border-div {
+  border-top: 1px solid;
+  border-color: black;
+  border-bottom: 1px solid;
+  background-color: white;
+  padding: 10px;
+  text-align: left;
+  font-size: 25px;
+  font-family: "Simplifica";
+}
+
 .border::after {
   content: "";
   height: 50px;
@@ -223,6 +235,8 @@ table.center {
 
 .centeredText {
   text-align: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 .MyCardElement {

@@ -38,7 +38,6 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)"
-    // backgroundImage: "url(http://localhost:3001/assets/background.jpg)"
   }
 };
 
@@ -206,14 +205,18 @@ const App = () => {
             </Grid.Row>
           </Grid>
           <div className="sticky">
-            <Grid verticalAlign="middle" style={{ width: "100vw" }}>
+            <Grid verticalAlign="middle" style={{ maxwidth: "1600px" }}>
               <Grid.Row only="computer" style={{ padding: "0px" }}>
-                <Grid.Column textAlign="left" width={4}>
+                <Grid.Column textAlign="left" width={9}>
                   <h3 style={{ fontFamily: "Simplifica", fontSize: "35px" }}>
                     CAROLINE SEILERN ART
                   </h3>
                 </Grid.Column>
-                <Grid.Column textAlign="right" width={12}>
+                <Grid.Column
+                  textAlign="right"
+                  width={7}
+                  style={{ textAlign: "right" }}
+                >
                   <NavBar />
                 </Grid.Column>
               </Grid.Row>

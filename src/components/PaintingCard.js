@@ -4,9 +4,9 @@ import { Divider } from "semantic-ui-react";
 const PaintingCard = ({ drawing, type, size, computer }) => {
   const centerImage = {
     objectFit: "cover",
+    margin: "0 auto",
     width: size,
     height: computer && size,
-    margin: "0 auto",
     paddingBottom: computer && "5px"
   };
 
@@ -19,7 +19,7 @@ const PaintingCard = ({ drawing, type, size, computer }) => {
   };
 
   return (
-    <div className="stickyPainting" >
+    <div className="stickyPainting" style={{ width: size, zIndex: "-5" }}>
       <img
         key={drawing.id}
         src={

@@ -23,7 +23,7 @@ const NavBar = props => {
     fontFamily: "Simplifica",
     textAlign: "center",
     outline: "none",
-    zIndex: "10"
+    zIndex: "11"
   };
 
   return (
@@ -39,14 +39,13 @@ const NavBar = props => {
         titleName="|   auctions   "
         close={props.close}
       />
-      {!isAuthenticated &&
-        !loading && (
-          <>
-            <button onClick={() => loginWithRedirect({})} style={navbarColors}>
-              | LOG IN
-            </button>
-          </>
-        )}
+      {!isAuthenticated && !loading && (
+        <>
+          <button onClick={() => loginWithRedirect({})} style={navbarColors}>
+            | LOG IN
+          </button>
+        </>
+      )}
       {/* only show logout when user is logged in */}
       {isAuthenticated && (
         <>

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 //authentication using Auth0
 import { useAuth0 } from "../react-auth0-spa";
 //stripe
-import { CardElement, injectStripe, Elements } from "react-stripe-elements";
-//my components
+import { CardElement, injectStripe } from "react-stripe-elements";
+//semantic-ui components
+import { Container, Button } from "semantic-ui-react";
 
 const Payment = props => {
-  const [complete, setComplete] = useState(false);
   const { user } = useAuth0();
 
   const submit = async event => {
@@ -43,7 +43,9 @@ const Payment = props => {
   return (
     <div className="checkout">
       <CardElement style={style} />
-      <button onClick={submit}>submit</button>
+      <Button basic color="black" onClick={submit}>
+        submit
+      </Button>
     </div>
   );
 };

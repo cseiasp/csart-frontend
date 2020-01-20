@@ -3,11 +3,13 @@ import React from "react";
 
 const WinningBid = props => {
   const centerImage = {
-    width: "50vw",
+    width: "65vw",
+    marginTop: "10px",
+    paddingTop: "25px",
     margin: "0 auto"
   };
   return (
-    <div>
+    <>
       {props.bid !== undefined && (
         <>
           {console.log("winning bids", props.bid)}
@@ -15,10 +17,12 @@ const WinningBid = props => {
             src={"http://localhost:3001/assets/" + props.bid.sale.painting.url}
             style={centerImage}
           />
-          <p>Bid Placed: {props.bid.display_text}</p>
+          <p style={{ paddingBottom: "14px", fontFamily: "Simplifica" }}>
+            Bid Placed: {props.bid.display_text}
+          </p>
         </>
       )}
-    </div>
+    </>
   );
 };
 
