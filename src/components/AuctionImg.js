@@ -8,11 +8,13 @@ const AuctionImg = ({ currentItem, handleClick }) => {
   const centerImageMobile = {
     height: "70vh",
     margin: "0 auto",
+    marginTop: "-30px",
     top: "15rem"
   };
   const centerImage = {
     height: "70vh",
-    margin: "0 auto"
+    margin: "0 auto",
+    marginTop: "-30px"
   };
 
   return (

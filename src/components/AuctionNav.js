@@ -10,6 +10,7 @@ const AuctionNav = ({ myId, auctionStarted }) => {
     <div
       style={{
         margin: "15px",
+        marginTop: "25px",
         fontSize: "25px",
         fontFamily: "Simplifica",
         zIndex: "11",
@@ -26,7 +27,7 @@ const AuctionNav = ({ myId, auctionStarted }) => {
       {/* <NavLinkItem linkName="auctions/upcoming" titleName={" upcoming "} />|
       <NavLinkItem linkName="auctions/past" titleName=" past " /> */}
       {myId !== "" && (
-        <NavLinkItem linkName="myauction" titleName=" my bids " />
+        <NavLinkItem linkName="myauction" titleName=" my profile " />
       )}
       {myId === 5 && (
         <NavLinkItem linkName="auctions/setup" titleName="| set up " />

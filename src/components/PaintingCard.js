@@ -31,14 +31,6 @@ const PaintingCard = ({ drawing, type, size, computer }) => {
         }
         style={centerImage}
       />
-      {console.log(
-        "http://localhost:3001/assets/" +
-          checkComputer() +
-          type +
-          "/" +
-          drawing.url
-      )}
-
       <>
         <p className="paragraph">{drawing.name + ", " + drawing.medium}</p>
         <p className="paragraph">

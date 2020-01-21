@@ -62,7 +62,8 @@ const AuctionForm = ({
                 style={{
                   fontFamily: "Simplifica",
                   textAlign: "center",
-                  margin: "20px"
+                  margin: "20px",
+                  fontSize: "35px"
                 }}
               >
                 " {currentItem.painting.name} "
@@ -84,14 +85,14 @@ const AuctionForm = ({
                         ? "£" + selectPaintingBids()[0].sale.bid_price
                         : "£0"}
                     </h2>
-                    <p style={{ fontSize: "18px" }}>HIGHEST BID</p>
+                    <p style={{ fontSize: "20px" }}>HIGHEST BID</p>
                   </Grid.Column>
                   <Grid.Column textAlign="left">
                     <h2>
                       {selectPaintingBids()[0] !== undefined
                         ? selectPaintingBids().length
                         : "0"}
-                      <p style={{ fontSize: "18px" }}> TOTAL BIDS</p>
+                      <p style={{ fontSize: "20px" }}> TOTAL BIDS</p>
                     </h2>
                   </Grid.Column>
                 </Grid.Row>

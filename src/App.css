@@ -45,10 +45,10 @@ grid {
 
 .stickyPainting:last-of-type {
   background-color: transparent;
-  padding-top: 30px;
+  padding-top: 0px;
 }
 .stickyPainting:last-of-type > img {
-  padding-top: 10px;
+  padding-top: 0px;
 }
 .stickyPainting:last-of-type > p {
   background-color: white;
@@ -67,6 +67,31 @@ grid {
 
 .stickyPaintingAuction::-webkit-scrollbar {
   display: none;
+}
+
+.stickyPaintingBids {
+  scroll-snap-align: end;
+  position: -webkit-sticky;
+  position: sticky;
+  overflow-y: scroll;
+  top: 9rem;
+  height: 90vh;
+  background-color: white;
+  text-align: left;
+  z-index:-1;
+}
+
+.stickyPaintingBids::-webkit-scrollbar {
+  display: none;
+}
+
+.stickyPaintingBids:last-of-type {
+  padding-top: 50px;
+  margin-top: 40px
+}
+.stickyPainting:last-of-type > img {
+  padding-top: 40px;
+  margin-top: 40px
 }
 
 .vertical-scroll-snap {
@@ -166,6 +191,7 @@ img {
   position: -webkit-sticky;
   position: sticky;
   top: 2.5rem;
+  z-index: 5;
 }
 
 
@@ -188,6 +214,7 @@ img {
 
 .portraitHeaderP {
   display: inline-block;
+  font-size: 25px;
   line-height: 82px;
 }
 .portraitSmallP {
@@ -241,7 +268,7 @@ img {
   font-size: 25px;
   font-weight: bold;
   font-family: "Simplifica";
-  top: 20%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -320,7 +347,7 @@ padding: 10px;
 }
 
 .show-bid-pics-web {
-  width: 25vw;
+  width: 30vw;
   z-index: -1;
   opacity: 0.2;
 }
@@ -331,6 +358,7 @@ padding: 10px;
 
 .padding-bottom-ten {
   padding-bottom: 10px;
+  font-size: 30px;
 }
 .padding-zero {
   padding: 0px;
@@ -343,6 +371,12 @@ padding: 10px;
   font-size: 25px;
   font-family: "Simplifica";
   display: inline-block;
+}
+.p-20 {
+  font-size: 20px;
+  font-family: "Simplifica";
+  display: inline-block;
+  max-width: 200px
 }
 
 .button-look {

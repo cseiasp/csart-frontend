@@ -18,7 +18,7 @@ const BidForm = props => {
         )
       }
     >
-      <Label as="a" tag style={{ fontSize: "15px", marginBottom: "10px" }}>
+      <Label as="a" tag style={{ fontSize: "20px", marginBottom: "10px" }}>
         {" "}
         Bid Amount{" "}
       </Label>

@@ -32,13 +32,12 @@ const MyAuction = ({ bidWinners, myBids, currentItem, displayWinningBids }) => {
 
   const showAllBids = () => {
     if (currentItem === undefined) {
-      return <ShowBids bid={myBids} />;
+      return <ShowBids bids={myBids} />;
     } else {
       const pastBids = myBids.filter(
         bid => bid.sale.painting_id !== currentItem.painting_id
       );
-
-      return <ShowBids bid={pastBids} />;
+      return <ShowBids bids={pastBids} />;
     }
   };
 
@@ -60,22 +59,24 @@ const MyAuction = ({ bidWinners, myBids, currentItem, displayWinningBids }) => {
   };
 
   return (
-    <>
+    <div className="vertical-scroll-snap">
       <h1>My Auction Bids</h1>
-      <p
-        className="margin-top-fifteen p-25"
-        onClick={() => setDisplayAllBids(false)}
-      >
-        PENDING BIDS |&nbsp;
-      </p>
-      <p
-        className=" margin-top-thirty p-25"
-        onClick={() => setDisplayAllBids(true)}
-      >
-        PAST BIDS
-      </p>
+      <div className="h2-border">
+        <p
+          className="margin-top-fifteen portraitHeaderP "
+          onClick={() => setDisplayAllBids(false)}
+        >
+          PENDING BIDS |&nbsp;
+        </p>
+        <p
+          className=" margin-top-thirty portraitHeaderP "
+          onClick={() => setDisplayAllBids(true)}
+        >
+          PAST BIDS
+        </p>
+      </div>
       {displayBids()}
-    </>
+    </div>
   );
 };
 
