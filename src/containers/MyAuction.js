@@ -3,22 +3,15 @@ import React, { useState, useEffect } from "react";
 import { useAuth0 } from "../react-auth0-spa";
 //my components
 import API from "../adapters/API";
+import ShowBids from "../components/ShowBids";
 
-const MyAuction = ({
-  bidWinners,
-  myBids,
-  myId,
-  currentItem,
-  displayWinningBids
-}) => {
+const MyAuction = ({ bidWinners, myBids, currentItem, displayWinningBids }) => {
   const [displayAllBids, setDisplayAllBids] = useState(false);
 
   const displayAllMyBids = () => {
     return (
       <div>
-        {myBids.length !== 0
-          ? showAllBids()
-          : "You have not made any bids yet. To place a bid click here."}
+        {myBids.length !== 0 ? showAllBids() : "There are no bids to display"}
       </div>
     );
   };
@@ -33,18 +26,19 @@ const MyAuction = ({
 
   const displayAllMyCurrentBids = () => {
     return !currentItem || currentItem.length === 0
-      ? "You have not made any bids yet. To place a bid click here."
+      ? "You have not made any bids recently"
       : showCurrentBids();
   };
 
   const showAllBids = () => {
     if (currentItem === undefined) {
-      return myBids.map(bid => <p key={bid.id}> {bid.display_text} </p>);
+      return <ShowBids bid={myBids} />;
     } else {
       const pastBids = myBids.filter(
         bid => bid.sale.painting_id !== currentItem.painting_id
       );
-      return pastBids.map(bid => <p key={bid.id}> {bid.display_text} </p>);
+
+      return <ShowBids bid={pastBids} />;
     }
   };
 
@@ -52,22 +46,36 @@ const MyAuction = ({
     const currentBids = myBids.filter(
       bid => bid.sale.painting_id === currentItem.painting_id
     );
-    // <ShowBids bids = {currentBids} />
-    // <img src = "http://localhost:3001/assets/" + props.bid.sale.painting.url />
-    return currentBids.map(bid => <p key={bid.id}> {bid.display_text} </p>);
+    return <ShowBids bids={currentBids} />;
+  };
+
+  const displayBids = () => {
+    if (!displayAllBids && currentItem !== undefined) {
+      return displayAllMyCurrentBids();
+    } else if (!displayAllBids) {
+      return pendingOrWinningBids();
+    } else {
+      return displayAllMyBids();
+    }
   };
 
   return (
-    <div>
+    <>
       <h1>My Auction Bids</h1>
-      <h2>Pending Bids</h2>
-      {currentItem !== undefined
-        ? displayAllMyCurrentBids()
-        : pendingOrWinningBids()}
-
-      <h2 onClick={() => setDisplayAllBids(!displayAllBids)}> Past Bids</h2>
-      {displayAllBids && displayAllMyBids()}
-    </div>
+      <p
+        className="margin-top-fifteen p-25"
+        onClick={() => setDisplayAllBids(false)}
+      >
+        PENDING BIDS |&nbsp;
+      </p>
+      <p
+        className=" margin-top-thirty p-25"
+        onClick={() => setDisplayAllBids(true)}
+      >
+        PAST BIDS
+      </p>
+      {displayBids()}
+    </>
   );
 };
 

@@ -173,8 +173,17 @@ const App = () => {
       return (
         <>
           <p>You have a winning bid</p>
-          {winningBids("25vw")}
-          <NavLinkItem linkName="purchase" titleName={"purchase now"} />
+          <Grid centered>
+            <Grid.Row only="computer">{winningBids("25vw")}</Grid.Row>
+          </Grid>
+          <Grid centered>
+            <Grid.Row only="tablet mobile">{winningBids("70vw")}</Grid.Row>
+          </Grid>
+          <Grid centered>
+            <div className="button-look margin-zero">
+              <NavLinkItem linkName="purchase" titleName={"Go To Basket"} />
+            </div>
+          </Grid>
         </>
       );
     }

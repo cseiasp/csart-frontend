@@ -91,12 +91,6 @@ export class Portraits extends Component {
           <Grid.Column only="computer" style={{ width: "480px" }}>
             {this.displayPortraits("480px", true)}
           </Grid.Column>
-
-          {/* <Grid.Row only="computer">
-              <Grid.Column style={{ width: "480px" }}>
-                {this.displayPortraits("480px", true)}
-              </Grid.Column>
-            </Grid.Row> */}
         </Grid>
       </div>
     );

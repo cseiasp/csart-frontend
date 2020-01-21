@@ -238,10 +238,10 @@ img {
   position: absolute;
   color: rgb(42, 54, 54);
   text-align: center;
-  font-size: 18px;
+  font-size: 25px;
   font-weight: bold;
   font-family: "Simplifica";
-  top: 50%;
+  top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -311,4 +311,44 @@ table.center {
 
 .navbar-mobile {
 padding: 10px;
+}
+
+.show-bid-pics-mobile {
+  width: 80vw;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+.show-bid-pics-web {
+  width: 25vw;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+.margin-top-fifteen {
+  margin-top: 15px;
+}
+
+.padding-bottom-ten {
+  padding-bottom: 10px;
+}
+.padding-zero {
+  padding: 0px;
+}
+.margin-zero {
+  padding: 0px;
+}
+
+.p-25 {
+  font-size: 25px;
+  font-family: "Simplifica";
+  display: inline-block;
+}
+
+.button-look {
+  border: 1px solid black;
+  border-radius: 5px;
+  line-height: 30px;
+  width: 140px;
+  text-align: center;
 }
