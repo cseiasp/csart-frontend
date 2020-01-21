@@ -173,18 +173,21 @@ const App = () => {
       return (
         <>
           <p>You have a winning bid</p>
-          {winningBids()}
+          {winningBids("25vw")}
           <NavLinkItem linkName="purchase" titleName={"purchase now"} />
         </>
       );
     }
   };
 
-  const winningBids = ( size) => {
-    console.log("winning bids", bidWinners);
+  const winningBids = size => {
     const myWin = bidWinners.filter(win => win.sale.user_id === myId)[0];
     return (
-      <>{myWin !== undefined && <WinningBid key={myWin.id} bid={myWin} size = {size}/>}</>
+      <>
+        {myWin !== undefined && (
+          <WinningBid key={myWin.id} bid={myWin} size={size} />
+        )}
+      </>
     );
   };
 
@@ -201,7 +204,7 @@ const App = () => {
         <Container>
           {/* show navbar modal */}
           <Grid centered>
-            <Grid.Row only="tablet mobile">
+            <Grid.Row only="tablet mobile" style={{ zIndex: "11" }}>
               <h3
                 className="sticky"
                 onClick={openOrCloseModal}
@@ -211,7 +214,7 @@ const App = () => {
               </h3>
             </Grid.Row>
           </Grid>
-          <div className="sticky">
+          <div className="sticky transparent" style={{ zIndex: "11" }}>
             <Grid verticalAlign="middle" style={{ maxwidth: "1600px" }}>
               <Grid.Row only="computer" style={{ padding: "0px" }}>
                 <Grid.Column textAlign="left" width={9}>

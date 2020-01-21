@@ -45,7 +45,7 @@ grid {
 
 .stickyPainting:last-of-type {
   background-color: transparent;
-  /* padding-top: 30px; */
+  padding-top: 30px;
 }
 .stickyPainting:last-of-type > img {
   padding-top: 10px;
@@ -124,19 +124,50 @@ img {
   margin-bottom: 25px;
 }
 
+.transparent {
+  background-color: transparent;
+}
+
+.white-background {
+  background-color: white;
+  line-height: 20px;
+}
+
+ .navbarColors {
+    color: black;
+    border: none;
+    font-size: 25px;
+    font-family: Simplifica;
+    text-align: center;
+    outline: none;
+  };
+
 .border {
   border-top: 1px solid;
   border-color: black;
   text-align: center;
   height: 80px;
   background-color: white;
-  /* padding-bottom: px; */
   font-size: 25px;
   font-family: "Simplifica";
   position: -webkit-sticky;
   position: sticky;
   top: 2.5rem;
 }
+
+.h2-border {
+  border-top: 1px solid;
+  border-color: black;
+  text-align: center;
+  height: 80px;
+  background-color: white;
+  font-size: 25px;
+  font-family: "Simplifica";
+  position: -webkit-sticky;
+  position: sticky;
+  top: 2.5rem;
+}
+
 
 .border-div {
   border-top: 1px solid;
@@ -147,13 +178,13 @@ img {
   font-size: 25px;
   font-family: "Simplifica";
 }
-
+/* 
 .border::after {
   content: "";
   height: 50px;
   top: 3rem;
   z-index: -1;
-}
+} */
 
 .portraitHeaderP {
   display: inline-block;
@@ -276,4 +307,8 @@ table.center {
 
 .MyCardElement--webkit-autofill {
   background-color: #fefde5 !important;
+}
+
+.navbar-mobile {
+padding: 10px;
 }

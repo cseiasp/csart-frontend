@@ -52,6 +52,8 @@ const MyAuction = ({
     const currentBids = myBids.filter(
       bid => bid.sale.painting_id === currentItem.painting_id
     );
+    // <ShowBids bids = {currentBids} />
+    // <img src = "http://localhost:3001/assets/" + props.bid.sale.painting.url />
     return currentBids.map(bid => <p key={bid.id}> {bid.display_text} </p>);
   };
 

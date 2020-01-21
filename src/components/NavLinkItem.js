@@ -1,13 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 //semantic-ui components
-import { Divider } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
 
 const NavLinkItem = props => {
   const link = {
     color: "black"
   };
-
 
   return (
     <>
@@ -20,7 +19,11 @@ const NavLinkItem = props => {
         }}
         onClick={props.close}
       >
-        {props.titleName.toUpperCase()}
+        {props.icon ? (
+          <Icon color="grey" name="shopping cart" size="small" />
+        ) : (
+          props.titleName.toUpperCase()
+        )}
       </NavLink>
     </>
   );

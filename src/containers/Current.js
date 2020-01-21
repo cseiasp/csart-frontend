@@ -50,7 +50,7 @@ const Current = ({
     <div className="vertical-scroll-snap">
       <h1>LIVE AUCTION</h1>
 
-      <div className="border">
+      <div className="h2-border">
         <CountdownTimer
           item={currentItem}
           auctionStarted={true}

@@ -33,11 +33,6 @@ const NavBarMobile = props => {
       <br />
       <br />
       <br />
-      <NavLinkItem linkName="about" titleName="about" close={props.close} />
-      <br />
-      <br />
-      {/* <Divider /> */}
-      <br />
       <NavLinkItem
         linkName="portraits"
         titleName="portraits"
@@ -45,7 +40,6 @@ const NavBarMobile = props => {
       />
       <br />
       <br />
-      {/* <Divider /> */}
       <br />
       <NavLinkItem
         linkName="auctions"
@@ -53,27 +47,30 @@ const NavBarMobile = props => {
         close={props.close}
       />
       <br />
-      {/* <Divider /> */}
       <br />
-      {!isAuthenticated &&
-        !loading && (
-          <>
-            <button onClick={() => loginWithRedirect({})} style={navbarColors}>
-              LOG IN
-            </button>
-          </>
-        )}
+
+      {!isAuthenticated && !loading && (
+        <>
+          <button onClick={() => loginWithRedirect({})} style={navbarColors}>
+            LOG IN
+          </button>
+        </>
+      )}
       {/* only show logout when user is logged in */}
       {isAuthenticated && (
         <>
           <br />
           <NavLinkItem
             linkName="myauction"
-            titleName="my auction"
+            titleName="my profile"
             close={props.close}
           />
           <br />
-          {/* <Divider /> */}
+          <br />
+          <br />
+          <NavLinkItem linkName="/purchase" titleName="basket" />
+
+          <br />
           <br />
         </>
       )}

@@ -15,23 +15,12 @@ const NavBar = props => {
     user
   } = useAuth0();
 
-  const navbarColors = {
-    backgroundColor: "white",
-    color: "black",
-    border: "none",
-    fontSize: "25px",
-    fontFamily: "Simplifica",
-    textAlign: "center",
-    outline: "none",
-    zIndex: "11"
-  };
-
   return (
-    <div style={navbarColors}>
-      <NavLinkItem linkName="about" titleName=" about " close={props.close} />
+    <div className="navbarColors transparent">
+      {/* <NavLinkItem linkName="about" titleName=" about " close={props.close} /> */}
       <NavLinkItem
         linkName="portraits"
-        titleName="|   portraits   "
+        titleName="   portraits   "
         close={props.close}
       />
       <NavLinkItem
@@ -41,7 +30,10 @@ const NavBar = props => {
       />
       {!isAuthenticated && !loading && (
         <>
-          <button onClick={() => loginWithRedirect({})} style={navbarColors}>
+          <button
+            onClick={() => loginWithRedirect({})}
+            className="white-background navbarColors"
+          >
             | LOG IN
           </button>
         </>
@@ -51,13 +43,17 @@ const NavBar = props => {
         <>
           <NavLinkItem
             linkName="myauction"
-            titleName="|   my auction  "
+            titleName="|   my profile  "
             close={props.close}
           />
+          | <NavLinkItem linkName="/purchase" titleName="basket" />
         </>
       )}
       {isAuthenticated && (
-        <button onClick={() => logout()} style={navbarColors}>
+        <button
+          onClick={() => logout()}
+          className="white-background navbarColors"
+        >
           | LOG OUT
         </button>
       )}

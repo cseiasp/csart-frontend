@@ -40,7 +40,10 @@ export class Portraits extends Component {
 
   portraitsNav = type => {
     return (
-      <div className="border" style={{ zIndex: "9" }}>
+      <div
+        className="h2-border"
+        // style={{ borderBottom: "1px solid", borderColor: "black" }}
+      >
         <p
           className={type}
           style={{ fontSize: "25px" }}
@@ -70,34 +73,31 @@ export class Portraits extends Component {
 
   render() {
     return (
-      <div>
-        <div className="vertical-scroll-snap">
-          <h1>PORTRAITS</h1>
-          {this.portraitsNav("portraitHeaderP")}
-          {/* {this.state.scrollPosition < 30 && this.portraitsNav("portraitSmallP")} */}
-          <Grid centered>
-            <Grid.Row only="mobile">
-              {this.displayPortraits("90vw", false)}
-            </Grid.Row>
-          </Grid>
-          <Grid centered>
-            <Grid.Row only="tablet">
-              {this.displayPortraits("75vw", false)}
-            </Grid.Row>
-          </Grid>
-          <Grid centered column={1}>
-            <Grid.Row only="computer">
-              <Grid.Column style={{ width: "480px" }}>
-                {this.displayPortraits("480px", true)}
-              </Grid.Column>
-            </Grid.Row>
-            {/* <Grid.Row only="computer">
+      <div className="vertical-scroll-snap">
+        <h1>PORTRAITS</h1>
+        {this.portraitsNav("portraitHeaderP")}
+        {/* {this.state.scrollPosition < 30 && this.portraitsNav("portraitSmallP")} */}
+        <Grid centered>
+          <Grid.Row only="mobile">
+            {this.displayPortraits("90vw", false)}
+          </Grid.Row>
+        </Grid>
+        <Grid centered>
+          <Grid.Row only="tablet">
+            {this.displayPortraits("75vw", false)}
+          </Grid.Row>
+        </Grid>
+        <Grid centered column={1}>
+          <Grid.Column only="computer" style={{ width: "480px" }}>
+            {this.displayPortraits("480px", true)}
+          </Grid.Column>
+
+          {/* <Grid.Row only="computer">
               <Grid.Column style={{ width: "480px" }}>
                 {this.displayPortraits("480px", true)}
               </Grid.Column>
             </Grid.Row> */}
-          </Grid>
-        </div>
+        </Grid>
       </div>
     );
   }

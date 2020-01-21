@@ -147,7 +147,8 @@ const Purchase = ({ winningBids, bidWinners }) => {
     return (
       <div
         style={{
-          paddingTop: "50%",
+          marginTop: "20%",
+
           fontFamily: "Simplifica"
         }}
       >
