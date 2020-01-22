@@ -46,7 +46,7 @@ const NavBar = props => {
             titleName="|   my profile  "
             close={props.close}
           />
-          | <NavLinkItem linkName="/purchase" titleName="basket" />
+          | <NavLinkItem linkName="purchase" titleName="basket" />
         </>
       )}
       {isAuthenticated && (
