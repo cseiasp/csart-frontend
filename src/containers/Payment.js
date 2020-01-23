@@ -15,6 +15,7 @@ const Payment = props => {
   const submit = async event => {
     // User email is either user.email from Auth0 OR from some guest email field
     event.preventDefault();
+
     let { token } = await props.stripe.createToken({ name: "Name" });
     let body = { token: token.id, email: user.email, amount: props.amount };
     let response = await fetch("http://localhost:3000/charge", {

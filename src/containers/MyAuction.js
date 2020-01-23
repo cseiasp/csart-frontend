@@ -64,15 +64,23 @@ const MyAuction = ({ bidWinners, myBids, currentItem, displayWinningBids }) => {
       <div className="h2-border">
         <p
           className="margin-top-fifteen portraitHeaderP "
+          style={{
+            cursor: "pointer",
+            textDecoration: !displayAllBids && "underline"
+          }}
           onClick={() => setDisplayAllBids(false)}
         >
-          PENDING BIDS |&nbsp;
+          PENDING BIDS&nbsp;
         </p>
         <p
           className=" margin-top-thirty portraitHeaderP "
+          style={{
+            cursor: "pointer",
+            textDecoration: displayAllBids && "underline"
+          }}
           onClick={() => setDisplayAllBids(true)}
         >
-          PAST BIDS
+          | &nbsp;PAST BIDS
         </p>
       </div>
       {displayBids()}

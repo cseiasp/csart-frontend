@@ -15,7 +15,7 @@ import API from "../adapters/API";
 
 Modal.setAppElement("#root");
 
-const Purchase = ({ winningBids, bidWinners }) => {
+const Purchase = ({ winningBids, bidWinners, setBidWinners }) => {
   const [myId, setMyId] = useState("");
   const [paymentOk, setPaymentOk] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -137,6 +137,7 @@ const Purchase = ({ winningBids, bidWinners }) => {
                   amount={bidWinners[0].sale.bid_price}
                   close={openOrCloseModal}
                   saleId={bidWinners.length > 0 ? bidWinners[0].sale.id : ""}
+                  setBidWinners = {setBidWinners}
                 />
               </Elements>
             </Modal>

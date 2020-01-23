@@ -23,6 +23,7 @@ export class Portraits extends Component {
           type="Drawings"
           size={size}
           computer={computer}
+          total={this.state.drawings.length}
         />
       ));
     } else {
@@ -33,6 +34,7 @@ export class Portraits extends Component {
           type="paintings"
           size={size}
           computer={computer}
+          total={this.state.drawings.length}
         />
       ));
     }
@@ -64,7 +66,7 @@ export class Portraits extends Component {
           }}
           onClick={() => this.setState({ drawingsShowing: false })}
         >
-          | PAINTINGS
+          | &nbsp;PAINTINGS
         </p>
       </div>
     );

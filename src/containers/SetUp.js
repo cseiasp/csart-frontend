@@ -14,7 +14,7 @@ const SetUp = ({ setAuctionItems, auctionItems }) => {
   const [endMonth, setEndMonth] = useState(0);
   const [endYear, setEndYear] = useState(2020);
   const [endTime, setEndTime] = useState(11);
-  const [painting, setPainting] = useState(76);
+  const [painting, setPainting] = useState(75);
   const [status, setStatus] = useState("upcoming");
   const history = useHistory();
 

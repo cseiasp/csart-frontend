@@ -71,13 +71,11 @@ const App = () => {
   //auction functions
   const defineAuctionItems = () => {
     if (selectAuctionItemWithStatus("current").length > 0) {
-      console.log(selectAuctionItemWithStatus("current"));
       return {
         items: selectAuctionItemWithStatus("current"),
         auctionOn: true
       };
     } else {
-      console.log(selectAuctionItemWithStatus("upcoming"));
       return {
         items: selectAuctionItemWithStatus("upcoming"),
         auctionOn: false
@@ -119,15 +117,16 @@ const App = () => {
       return API.saveUser(email, newsletter)
         .then(user => API.placeBid(painting_id, user.id, bid_price, status))
         .then(bid => {
-          setBidPlaced(bid) && addBid(bid);
+          addBid(bid);
         })
         .then(setError(""));
     }
   };
 
   const addBid = bid => {
-    const newBids = [bid, ...myBids];
+    const newBids = [bid.new_bid, ...myBids];
     setMyBids(newBids);
+    setBidPlaced(bid);
   };
 
   const setItemToPast = id => {
@@ -144,7 +143,7 @@ const App = () => {
       .then(bid => defineBidWin(bid.win))
       .then(() => API.setAuctionToPast(currentItem.id, "past"))
       .then(item => setItemToPast(item.id))
-      .then(history.push("/auctions"))
+      .then(history.push("/myauction"))
       .catch(error => console.log(error));
   };
 
@@ -261,6 +260,7 @@ const App = () => {
                   currentItem={selectAuctionItemWithStatus("current")[0]}
                   bidWinners={bidWinners}
                   winningBids={winningBids}
+                  setBidWinners = {setBidWinners}
                 />
               )}
             />

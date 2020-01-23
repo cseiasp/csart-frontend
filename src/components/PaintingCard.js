@@ -1,7 +1,7 @@
 import React from "react";
-import { Divider } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
-const PaintingCard = ({ drawing, type, size, computer }) => {
+const PaintingCard = ({ drawing, type, size, computer, total }) => {
   const centerImage = {
     objectFit: "cover",
     margin: "0 auto",
@@ -15,6 +15,15 @@ const PaintingCard = ({ drawing, type, size, computer }) => {
       return "Computer/";
     } else {
       return "";
+    }
+  };
+
+  const idNumber = () => {
+    const num = ((drawing.id % total) + 2) % total;
+    if (num === 0) {
+      return total;
+    } else {
+      return num;
     }
   };
 
@@ -32,11 +41,27 @@ const PaintingCard = ({ drawing, type, size, computer }) => {
         style={centerImage}
       />
       <>
-        <p style={{ textAlign: "left" }}>1/9</p>
-        <p className="paragraph">{drawing.name + ", " + drawing.medium}</p>
-        <p className="paragraph">
-          {drawing.exhibited_at && drawing.exhibited_at}
-        </p>
+        <Grid>
+          <Grid.Column>
+            <p style={{ textAlign: "left", backgroundColor: "white" }}>
+              {idNumber()}/{total}&nbsp;
+            </p>
+          </Grid.Column>
+          <Grid.Column width={14}>
+            <p
+              className="paragraph"
+              style={{ fontSize: "11px", paddingTop: "8px" }}
+            >
+              {drawing.exhibited_at && drawing.exhibited_at}
+            </p>
+            <p
+              className="paragraph"
+              style={{ fontSize: "11px", paddingTop: "8px" }}
+            >
+              {drawing.award && drawing.award}
+            </p>
+          </Grid.Column>
+        </Grid>
       </>
     </div>
   );
