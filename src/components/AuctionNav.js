@@ -14,7 +14,8 @@ const AuctionNav = ({ myId, auctionStarted }) => {
         fontSize: "25px",
         fontFamily: "Simplifica",
         zIndex: "11",
-        padding: "3px"
+        padding: "3px",
+        cursor: "pointer"
       }}
     >
       <br />

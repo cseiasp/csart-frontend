@@ -5,7 +5,8 @@ import { Icon } from "semantic-ui-react";
 
 const NavLinkItem = props => {
   const link = {
-    color: "black"
+    color: "black",
+    cursor: "pointer"
   };
 
   return (

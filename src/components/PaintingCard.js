@@ -32,6 +32,7 @@ const PaintingCard = ({ drawing, type, size, computer }) => {
         style={centerImage}
       />
       <>
+        <p style={{ textAlign: "left" }}>1/9</p>
         <p className="paragraph">{drawing.name + ", " + drawing.medium}</p>
         <p className="paragraph">
           {drawing.exhibited_at && drawing.exhibited_at}

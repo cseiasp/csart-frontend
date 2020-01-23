@@ -85,6 +85,9 @@ const Purchase = ({ winningBids, bidWinners }) => {
     }
   };
 
+  const myWin = () => {
+    return bidWinners.filter(win => win.sale.user_id === myId)[0];
+  };
   const displayBasket = () => {
     return (
       <div style={{ padding: "0px" }}>
@@ -164,7 +167,7 @@ const Purchase = ({ winningBids, bidWinners }) => {
 
   return (
     <div>
-      <h1>BASKET</h1>
+      <h1 style={{ zIndex: "9" }}>BASKET</h1>
       {bidWinners.length > 0 ? displayBasket() : emptyBasket()}
     </div>
   );

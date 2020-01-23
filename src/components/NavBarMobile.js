@@ -68,7 +68,11 @@ const NavBarMobile = props => {
           <br />
           <br />
           <br />
-          <NavLinkItem linkName="purchase" titleName="basket" />
+          <NavLinkItem
+            linkName="purchase"
+            titleName="basket"
+            close={props.close}
+          />
 
           <br />
           <br />

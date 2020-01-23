@@ -52,7 +52,6 @@ const App = () => {
   //state for current
   const [bid, setBid] = useState("");
   const [bidPlaced, setBidPlaced] = useState("");
-  const [allFetchedBids, setAllFetchedBids] = useState([]);
   const [allBids, setAllBids] = useState([]);
   const [error, setError] = useState("");
   //history
@@ -61,7 +60,6 @@ const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [auctionItems, setAuctionItems] = useState([]);
   const [bidWinners, setBidWinners] = useState([]);
-  const [myWins, setMyWins] = useState([]);
   //action Cable
   // const cable = ActionCable.createConsumer("ws://localhost:3000/cable");
 
@@ -120,14 +118,16 @@ const App = () => {
     } else {
       return API.saveUser(email, newsletter)
         .then(user => API.placeBid(painting_id, user.id, bid_price, status))
-        .then(bid => setBidPlaced(bid))
+        .then(bid => {
+          setBidPlaced(bid) && addBid(bid);
+        })
         .then(setError(""));
     }
   };
 
   const addBid = bid => {
-    const newBids = [bid, ...allBids];
-    setAllBids(newBids);
+    const newBids = [bid, ...myBids];
+    setMyBids(newBids);
   };
 
   const setItemToPast = id => {

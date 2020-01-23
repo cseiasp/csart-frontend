@@ -11,12 +11,12 @@ import AllBids from "./AllBids";
 
 const AuctionForm = ({
   currentItem,
-  handleClick,
+
   placeBidForm,
   allBids,
-  displayBids,
+
   endOfAuction,
-  setDisplayBids,
+
   setAllBids,
   bidPlaced,
   error

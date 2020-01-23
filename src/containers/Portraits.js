@@ -10,7 +10,7 @@ export class Portraits extends Component {
   state = {
     paintings: [],
     drawings: [],
-    drawingsShowing: false,
+    drawingsShowing: true,
     scrollPosition: 5
   };
 
@@ -46,17 +46,25 @@ export class Portraits extends Component {
       >
         <p
           className={type}
-          style={{ fontSize: "25px" }}
+          style={{
+            fontSize: "25px",
+            cursor: "pointer",
+            textDecoration: this.state.drawingsShowing && "underline"
+          }}
           onClick={() => this.setState({ drawingsShowing: true })}
         >
-          DRAWINGS |&nbsp;
+          DRAWINGS&nbsp;
         </p>
         <p
           className={type}
-          style={{ fontSize: "25px" }}
+          style={{
+            fontSize: "25px",
+            cursor: "pointer",
+            textDecoration: !this.state.drawingsShowing && "underline"
+          }}
           onClick={() => this.setState({ drawingsShowing: false })}
         >
-          PAINTINGS
+          | PAINTINGS
         </p>
       </div>
     );
