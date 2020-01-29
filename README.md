@@ -5,8 +5,9 @@ This is a work in progress, passion project showcasing my art and providing a pl
 <img align="center" src="HomePageWeb.png">
 
 Demo of mobile site below:
-
-<img align="center" src="CSart.gif">
+<p align= "center">
+  <img align="center" src="CSart.gif">
+</p>
 
 Hope you like it!
 
